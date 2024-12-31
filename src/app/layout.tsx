@@ -5,9 +5,10 @@ import { Roboto } from "next/font/google";
 import { ThemeProvider } from "@mui/material/styles";
 import theme from "../theme";
 import Header from "./header";
+import { Box } from "@mui/material";
 
 const roboto = Roboto({
-  weight: ["300", "400", "500", "700"],
+  weight: ["100", "300", "400", "500", "700", "900"],
   subsets: ["latin"],
   display: "swap",
   variable: "--font-roboto",
@@ -30,7 +31,10 @@ export default function RootLayout({
       <body className={roboto.variable}>
         <AppRouterCacheProvider>
           <ThemeProvider theme={theme}>
-            <Header>{children}</Header>
+            <Header />
+            <Box width={"70%"} margin={"auto"} padding={5}>
+              {children}
+            </Box>
           </ThemeProvider>
         </AppRouterCacheProvider>
       </body>
