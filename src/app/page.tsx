@@ -244,6 +244,11 @@ export default function Home() {
               <SkillsChip label="MongoDB" />
               <SkillsChip label="PostgreSQL" />
             </SkillsItemLine>
+            <SkillsItemLine title="Other">
+              <SkillsChip label="Git" />
+              <SkillsChip label="Linux" />
+              <SkillsChip label="Docker" />
+            </SkillsItemLine>
           </Stack>
         </HomePageItem>
       </Stack>

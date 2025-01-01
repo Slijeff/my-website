@@ -6,6 +6,7 @@ import { ThemeProvider } from "@mui/material/styles";
 import theme from "../theme";
 import Header from "./header";
 import { Box } from "@mui/material";
+import Footer from "./footer";
 
 const roboto = Roboto({
   weight: ["100", "300", "400", "500", "700", "900"],
@@ -32,9 +33,14 @@ export default function RootLayout({
         <AppRouterCacheProvider>
           <ThemeProvider theme={theme}>
             <Header />
-            <Box width={{ xs: "80%", sm: "70%" }} margin={"auto"} padding={5}>
+            <Box
+              width={{ xs: "80%", sm: "70%", lg: "40%" }}
+              margin={"auto"}
+              padding={5}
+            >
               {children}
             </Box>
+            <Footer />
           </ThemeProvider>
         </AppRouterCacheProvider>
       </body>
