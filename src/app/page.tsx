@@ -8,6 +8,7 @@ import {
   ListItem,
   ListItemIcon,
   ListItemText,
+  Chip,
 } from "@mui/material";
 import Image from "next/image";
 import Grid from "@mui/material/Grid2";
@@ -20,13 +21,15 @@ interface HomePageItemProps {
 function HomePageItem({ children, title }: HomePageItemProps): React.ReactNode {
   return (
     <Grid gap={{ sm: 2, xs: 1 }} container width={"100%"}>
-      <Grid size={{ sm: 2 }}>
+      <Grid size={{ sm: 3 }}>
         <Typography variant="h5" sx={{ fontWeight: 500 }}>
           {title}
         </Typography>
       </Grid>
 
-      <Grid size={{ sm: "grow" }}>{children}</Grid>
+      <Grid size={{ sm: "grow" }} width={"100%"}>
+        {children}
+      </Grid>
     </Grid>
   );
 }
@@ -66,10 +69,10 @@ function ExperienceCard({
   endDate,
 }: ExperienceCardProps): React.ReactNode {
   return (
-    <Card sx={{ width: "100%" }} variant="outlined">
+    <Card sx={{ minWidth: "100%" }} variant="outlined">
       <CardContent>
         <Stack gap={2}>
-          <Stack>
+          <Stack gap={0}>
             <Typography variant="body1" sx={{ fontWeight: 500 }}>
               {position}
             </Typography>
@@ -95,6 +98,39 @@ function ExperienceCard({
   );
 }
 
+function SkillsChip({ label }: { label: string }) {
+  return (
+    <Chip variant="outlined" sx={{ width: "fit-content" }} label={label} />
+  );
+}
+
+function SkillsItemLine({
+  title,
+  children,
+}: {
+  title: string;
+  children: React.ReactNode;
+}) {
+  return (
+    <Grid container spacing={1} direction={{ xs: "column", sm: "row" }}>
+      <Grid size={{ xs: 12, sm: 4 }}>
+        <Typography
+          variant="body1"
+          color="primary.light"
+          sx={{ fontWeight: 500 }}
+        >
+          {title}
+        </Typography>
+      </Grid>
+      <Grid size={{ xs: 12, sm: 8 }}>
+        <Stack gap={1} direction={"row"} flexWrap={"wrap"}>
+          {children}
+        </Stack>
+      </Grid>
+    </Grid>
+  );
+}
+
 export default function Home() {
   return (
     <Stack gap={4} alignItems={"center"}>
@@ -114,7 +150,7 @@ export default function Home() {
       </Typography>
       <Stack
         direction="column"
-        spacing={4}
+        spacing={6}
         width="100%"
         padding={{ xs: 0, sm: 2 }}
       >
@@ -124,11 +160,10 @@ export default function Home() {
             sx={{ fontWeight: 300 }}
             color="primary.light"
           >
-            I am a software engineer and a student at the University of
-            California, Berkeley. I am passionate about building user-friendly
-            and accessible web applications. I am also interested in
-            contributing to open-source projects and working on projects that
-            align with my personal interests.
+            I am currently a software engineer at Geico. I am passionate about
+            building user-friendly and accessible web applications. I am also
+            interested in contributing to open-source projects and working on
+            projects that align with my personal interests.
           </Typography>
         </HomePageItem>
         <HomePageItem title="Experience">
@@ -187,6 +222,28 @@ export default function Home() {
               <ExperienceItem>Major in Data Science</ExperienceItem>
               <ExperienceItem>GPA 3.8/4.0</ExperienceItem>
             </ExperienceCard>
+          </Stack>
+        </HomePageItem>
+        <HomePageItem title="Skills">
+          <Stack gap={2}>
+            <SkillsItemLine title="Languages">
+              <SkillsChip label="JavaScript" />
+              <SkillsChip label="Python" />
+              <SkillsChip label="Java" />
+              <SkillsChip label="TypeScript" />
+            </SkillsItemLine>
+            <SkillsItemLine title="Frontend">
+              <SkillsChip label="React" />
+              <SkillsChip label="Next.js" />
+              <SkillsChip label="Material-UI" />
+              <SkillsChip label="Tailwind CSS" />
+            </SkillsItemLine>
+            <SkillsItemLine title="Backend">
+              <SkillsChip label="Node.js" />
+              <SkillsChip label="Express.js" />
+              <SkillsChip label="MongoDB" />
+              <SkillsChip label="PostgreSQL" />
+            </SkillsItemLine>
           </Stack>
         </HomePageItem>
       </Stack>

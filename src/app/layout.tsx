@@ -32,7 +32,7 @@ export default function RootLayout({
         <AppRouterCacheProvider>
           <ThemeProvider theme={theme}>
             <Header />
-            <Box width={"70%"} margin={"auto"} padding={5}>
+            <Box width={{ xs: "80%", sm: "70%" }} margin={"auto"} padding={5}>
               {children}
             </Box>
           </ThemeProvider>
