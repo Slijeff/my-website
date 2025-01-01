@@ -10,6 +10,7 @@ import {
   ListItemIcon,
   ListItemText,
   Chip,
+  CardActionArea,
 } from "@mui/material";
 import Image from "next/image";
 import Grid from "@mui/material/Grid2";
@@ -58,44 +59,55 @@ function ExperienceItem({ children }: ExperienceItemProps): React.ReactNode {
 
 interface ExperienceCardProps {
   children: React.ReactNode;
-  position: string;
-  company: string;
+  title: string;
+  subtitle?: string;
   startDate: string;
-  endDate: string;
+  endDate?: string;
+  clickable?: boolean;
 }
 function ExperienceCard({
   children,
-  position,
-  company,
+  title,
+  subtitle,
   startDate,
   endDate,
+  clickable = false,
 }: ExperienceCardProps): React.ReactNode {
-  return (
-    <Card sx={{ minWidth: "100%" }} variant="outlined">
-      <CardContent>
-        <Stack gap={2}>
-          <Stack gap={0}>
-            <Typography variant="body1" sx={{ fontWeight: 500 }}>
-              {position}
-            </Typography>
+  const content = (
+    <CardContent>
+      <Stack gap={2}>
+        <Stack gap={0}>
+          <Typography variant="body1" sx={{ fontWeight: 500 }}>
+            {title}
+          </Typography>
+          {subtitle && (
             <Typography
               variant="body2"
               sx={{ fontWeight: 300 }}
               color="primary.lighter"
             >
-              {company}
+              {subtitle}
             </Typography>
-            <Typography
-              variant="body2"
-              sx={{ fontWeight: 300 }}
-              color="primary.lighter"
-            >
-              {startDate} - {endDate}
-            </Typography>
-          </Stack>
-          <List disablePadding>{children}</List>
+          )}
+          <Typography
+            variant="body2"
+            sx={{ fontWeight: 300 }}
+            color="primary.lighter"
+          >
+            {startDate} {endDate && `- ${endDate}`}
+          </Typography>
         </Stack>
-      </CardContent>
+        <List disablePadding>{children}</List>
+      </Stack>
+    </CardContent>
+  );
+  return (
+    <Card
+      sx={{ minWidth: "100%" }}
+      variant={clickable ? "elevation" : "outlined"}
+      elevation={clickable ? 4 : undefined}
+    >
+      {clickable ? <CardActionArea>{content}</CardActionArea> : content}
     </Card>
   );
 }
@@ -188,8 +200,8 @@ export default function Home() {
         <HomePageItem title="Experience">
           <Stack gap={1}>
             <ExperienceCard
-              company="Google"
-              position="Lead Software Engineer"
+              subtitle="Google"
+              title="Lead Software Engineer"
               startDate="Dec 2023"
               endDate="Present"
             >
@@ -205,8 +217,8 @@ export default function Home() {
               </ExperienceItem>
             </ExperienceCard>
             <ExperienceCard
-              company="Meta"
-              position="Senior Software Engineer"
+              subtitle="Meta"
+              title="Senior Software Engineer"
               startDate="Dec 2010"
               endDate="Nov 2023"
             >
@@ -223,8 +235,8 @@ export default function Home() {
         <HomePageItem title="Education">
           <Stack gap={1}>
             <ExperienceCard
-              company="University of Illinois at Urbana-Champaign"
-              position="Master of Computer Science"
+              subtitle="University of Illinois at Urbana-Champaign"
+              title="Master of Computer Science"
               startDate="Sep 2023"
               endDate="Dec 2024"
             >
@@ -232,8 +244,8 @@ export default function Home() {
               <ExperienceItem>GPA 3.8/4.0</ExperienceItem>
             </ExperienceCard>
             <ExperienceCard
-              company="University of Wisconsin-Madison"
-              position="Bachelor of Science"
+              subtitle="University of Wisconsin-Madison"
+              title="Bachelor of Science"
               startDate="Sep 2020"
               endDate="May 2023"
             >
@@ -243,7 +255,24 @@ export default function Home() {
             </ExperienceCard>
           </Stack>
         </HomePageItem>
-        <HomePageItem title="Projects">Test</HomePageItem>
+        <HomePageItem title="Projects">
+          <ExperienceCard title="Game AI" startDate="May 2022" clickable>
+            <ExperienceItem>
+              Developed an AI using Minimax algorithm to play the game of Gomoku
+              then optimized with Alpha-Beta pruning algorithm and parallel
+              computing with Multiprocessing that decreases 11% of the average
+              calculation time in the first 10 steps.
+            </ExperienceItem>
+            <ExperienceItem>
+              Constructed a back-end server to provide APIs using Flask and
+              built a front-end interactive game board using React.
+            </ExperienceItem>
+            <ExperienceItem>
+              Deployed the app to an Oracle Cloud compute instance and
+              simplified deployment using Docker and Docker Compose.
+            </ExperienceItem>
+          </ExperienceCard>
+        </HomePageItem>
         <HomePageItem title="Skills">
           <Stack gap={2}>
             <SkillsItemLine title="Languages">
