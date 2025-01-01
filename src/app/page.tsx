@@ -1,3 +1,4 @@
+"use client";
 import {
   Box,
   Stack,
@@ -13,6 +14,7 @@ import {
 import Image from "next/image";
 import Grid from "@mui/material/Grid2";
 import CircleIcon from "@mui/icons-material/Circle";
+import { motion } from "motion/react";
 
 interface HomePageItemProps {
   title: string;
@@ -132,6 +134,7 @@ function SkillsItemLine({
 }
 
 export default function Home() {
+  const nameText = "Hi, I am Jeffrey Hui".split(" ");
   return (
     <Stack gap={4} alignItems={"center"}>
       <Image
@@ -146,7 +149,22 @@ export default function Home() {
       />
 
       <Typography variant="h3" sx={{ fontWeight: 700 }}>
-        <Box>Hi, I am Jeffrey Hui</Box>
+        {nameText.map((el, i) => {
+          return (
+            <Box
+              component={motion.span}
+              key={i}
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{
+                duration: 0.6,
+                delay: i / 10,
+              }}
+            >
+              {el}{" "}
+            </Box>
+          );
+        })}
         <Box>Welcome to my page 👋</Box>
       </Typography>
       <Stack

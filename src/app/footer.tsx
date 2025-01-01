@@ -14,7 +14,7 @@ export default function Footer() {
         sx={{ textAlign: "start", fontWeight: 300 }}
         color="primary.lighter"
       >
-        © 2023 Slijeff&apos;s Realm. All rights reserved.
+        © 2025 Slijeff&apos;s Realm. All rights reserved.
       </Typography>
     </Stack>
   );
