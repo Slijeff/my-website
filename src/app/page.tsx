@@ -142,6 +142,7 @@ export default function Home() {
         alt="Avatar"
         width={200}
         height={200}
+        priority
       />
 
       <Typography variant="h3" sx={{ fontWeight: 700 }}>
@@ -224,6 +225,7 @@ export default function Home() {
             </ExperienceCard>
           </Stack>
         </HomePageItem>
+        <HomePageItem title="Projects">Test</HomePageItem>
         <HomePageItem title="Skills">
           <Stack gap={2}>
             <SkillsItemLine title="Languages">

@@ -1,5 +1,16 @@
 "use client";
-import { IconButton, Stack, Typography, useColorScheme } from "@mui/material";
+import {
+  Drawer,
+  IconButton,
+  List,
+  ListItem,
+  ListItemIcon,
+  Stack,
+  Typography,
+  useColorScheme,
+  useMediaQuery,
+  useTheme,
+} from "@mui/material";
 import Box from "@mui/material/Box";
 import Grid from "@mui/material/Grid2";
 import Link from "next/link";
@@ -9,30 +20,58 @@ import DarkModeIcon from "@mui/icons-material/DarkMode";
 import InstagramIcon from "@mui/icons-material/Instagram";
 import LightModeIcon from "@mui/icons-material/LightMode";
 import TranslateIcon from "@mui/icons-material/Translate";
+import MenuIcon from "@mui/icons-material/Menu";
+import HomeIcon from "@mui/icons-material/Home";
+import BookIcon from "@mui/icons-material/Book";
+import SendIcon from "@mui/icons-material/Send";
+import BookmarkIcon from "@mui/icons-material/Bookmark";
 import { usePathname } from "next/navigation";
+import { useState } from "react";
+
+const MenuSections: { title: string; icon: React.ReactNode }[] = [
+  {
+    title: "Home",
+    icon: <HomeIcon />,
+  },
+  {
+    title: "Blogs",
+    icon: <BookIcon />,
+  },
+  {
+    title: "Contact",
+    icon: <SendIcon />,
+  },
+  {
+    title: "Collections",
+    icon: <BookmarkIcon />,
+  },
+];
 
 interface HeaderLinkProps {
   text: string;
+  setDrawer?: React.Dispatch<React.SetStateAction<boolean>>;
 }
-function HeaderLink({ text }: HeaderLinkProps) {
+function HeaderLink({ text, setDrawer = () => {} }: HeaderLinkProps) {
   const pathName = usePathname();
   const navigateTo = text === "Home" ? "/" : `/${text.toLowerCase()}`;
   return (
-    <Link href={navigateTo}>
-      <Typography
-        variant="h6"
-        color={"primary"}
-        fontWeight={400}
-        sx={{
-          ":hover": {
-            textDecoration: "underline",
-          },
-          textDecoration: pathName === navigateTo ? "underline" : "none",
-        }}
-      >
-        {text}
-      </Typography>
-    </Link>
+    <Box onClick={() => setDrawer && setDrawer(false)}>
+      <Link href={navigateTo}>
+        <Typography
+          variant="h6"
+          color={"primary"}
+          fontWeight={400}
+          sx={{
+            ":hover": {
+              textDecoration: "underline",
+            },
+            textDecoration: pathName === navigateTo ? "underline" : "none",
+          }}
+        >
+          {text}
+        </Typography>
+      </Link>
+    </Box>
   );
 }
 
@@ -48,8 +87,9 @@ function HeaderLinkIcon({ icon, onClick }: HeaderLinkIconProps) {
   );
 }
 
-export default function Header() {
+function DefaultHeader() {
   const { mode, setMode } = useColorScheme();
+
   return (
     <Box
       position="sticky"
@@ -72,10 +112,9 @@ export default function Header() {
       >
         <Grid size={5}>
           <Stack width={"100%"} gap={3} direction="row" alignItems="center">
-            <HeaderLink text="Home" />
-            <HeaderLink text="Blogs" />
-            <HeaderLink text="Contact" />
-            <HeaderLink text="Collections" />
+            {MenuSections.map(({ title }) => (
+              <HeaderLink key={title} text={title} />
+            ))}
           </Stack>
         </Grid>
         <Grid size={5}>
@@ -98,4 +137,89 @@ export default function Header() {
       </Grid>
     </Box>
   );
+}
+
+function MobileMenuListItemWrapper({
+  children,
+  icon,
+}: {
+  children: React.ReactNode;
+  icon: React.ReactNode;
+}) {
+  return (
+    <ListItem>
+      <ListItemIcon>{icon}</ListItemIcon>
+      {children}
+    </ListItem>
+  );
+}
+
+function MobileHeader() {
+  const { mode, setMode } = useColorScheme();
+  const [openDrawer, setOpenDrawer] = useState(false);
+
+  return (
+    <Box
+      position="sticky"
+      height="64px"
+      sx={{
+        top: 0,
+        backdropFilter: "blur(4px)",
+        transition: "all 0.5s ease-in-out",
+      }}
+    >
+      <Drawer
+        open={openDrawer}
+        onClose={() => setOpenDrawer(false)}
+        anchor="top"
+      >
+        <List>
+          {MenuSections.map(({ title, icon }) => (
+            <MobileMenuListItemWrapper key={title} icon={icon}>
+              <HeaderLink text={title} setDrawer={setOpenDrawer} />
+            </MobileMenuListItemWrapper>
+          ))}
+        </List>
+      </Drawer>
+      <Grid
+        container
+        direction="row"
+        justifyContent="space-between"
+        alignItems="center"
+        sx={{ height: "100%" }}
+        padding={2}
+        paddingLeft={4}
+        paddingRight={4}
+      >
+        <Grid size={5}>
+          <IconButton sx={{ padding: 0 }} onClick={() => setOpenDrawer(true)}>
+            <MenuIcon />
+          </IconButton>
+        </Grid>
+        <Grid size={5}>
+          <Stack
+            width={"100%"}
+            gap={3}
+            direction="row-reverse"
+            alignItems="center"
+          >
+            <HeaderLinkIcon
+              onClick={() => setMode(mode === "dark" ? "light" : "dark")}
+              icon={mode === "dark" ? <LightModeIcon /> : <DarkModeIcon />}
+            />
+            <HeaderLinkIcon icon={<TranslateIcon />} />
+            <HeaderLinkIcon icon={<GitHubIcon />} />
+            <HeaderLinkIcon icon={<LinkedInIcon />} />
+            <HeaderLinkIcon icon={<InstagramIcon />} />
+          </Stack>
+        </Grid>
+      </Grid>
+    </Box>
+  );
+}
+
+export default function Header() {
+  const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down("md"));
+  return isMobile ? <MobileHeader /> : <DefaultHeader />;
 }
