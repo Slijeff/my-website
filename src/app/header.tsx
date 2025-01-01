@@ -47,6 +47,24 @@ const MenuSections: { title: string; icon: React.ReactNode }[] = [
   },
 ];
 
+const socialLinks = [
+  {
+    title: "GitHub",
+    icon: <GitHubIcon />,
+    link: "https://github.com/Slijeff",
+  },
+  {
+    title: "LinkedIn",
+    icon: <LinkedInIcon />,
+    link: "https://www.linkedin.com/in/tingwai-hui/",
+  },
+  {
+    title: "Instagram",
+    icon: <InstagramIcon />,
+    link: "https://www.instagram.com/jeffreyhui21/",
+  },
+];
+
 interface HeaderLinkProps {
   text: string;
   setDrawer?: React.Dispatch<React.SetStateAction<boolean>>;
@@ -89,7 +107,6 @@ function HeaderLinkIcon({ icon, onClick }: HeaderLinkIconProps) {
 
 function DefaultHeader() {
   const { mode, setMode } = useColorScheme();
-
   return (
     <Box
       position="sticky"
@@ -129,9 +146,13 @@ function DefaultHeader() {
               icon={mode === "dark" ? <LightModeIcon /> : <DarkModeIcon />}
             />
             <HeaderLinkIcon icon={<TranslateIcon />} />
-            <HeaderLinkIcon icon={<GitHubIcon />} />
-            <HeaderLinkIcon icon={<LinkedInIcon />} />
-            <HeaderLinkIcon icon={<InstagramIcon />} />
+            {socialLinks.map(({ title, icon, link }) => (
+              <HeaderLinkIcon
+                key={title}
+                icon={icon}
+                onClick={() => window.open(link, "_blank")}
+              />
+            ))}
           </Stack>
         </Grid>
       </Grid>
@@ -208,9 +229,13 @@ function MobileHeader() {
               icon={mode === "dark" ? <LightModeIcon /> : <DarkModeIcon />}
             />
             <HeaderLinkIcon icon={<TranslateIcon />} />
-            <HeaderLinkIcon icon={<GitHubIcon />} />
-            <HeaderLinkIcon icon={<LinkedInIcon />} />
-            <HeaderLinkIcon icon={<InstagramIcon />} />
+            {socialLinks.map(({ title, icon, link }) => (
+              <HeaderLinkIcon
+                key={title}
+                icon={icon}
+                onClick={() => window.open(link, "_blank")}
+              />
+            ))}
           </Stack>
         </Grid>
       </Grid>
