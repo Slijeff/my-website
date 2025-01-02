@@ -17,7 +17,7 @@ pipeline {
         stage('Deploy') {
             steps {
                 echo 'Deploying....'
-                sh 'docker run --rm -d -p 9004:3000 my-website:latest --name my-website'
+                sh 'docker run -d --name my-website -p 9004:3000 my-website:latest'
             }
         }
     }
