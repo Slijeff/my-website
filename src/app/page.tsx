@@ -238,34 +238,62 @@ export default function Home() {
         <HomePageItem title="Experience">
           <Stack gap={1}>
             <ExperienceCard
-              subtitle="Google"
-              title="Lead Software Engineer"
-              startDate="Dec 2023"
-              endDate="Present"
+              subtitle="Bowtie Life Insurance Company Limited"
+              title="Software Engineer Intern"
+              startDate="May 2024"
+              endDate="Aug 2024"
             >
               <ExperienceItem>
-                Built and maintained a large-scale web app
+                Tested the payout method component using Jest and React Testing
+                Library that increased the Codecov coverage by 0.23%
               </ExperienceItem>
               <ExperienceItem>
-                Maintained and improved the performance of the app by 10x
+                Added scroll buttons to easily discover overflown tabs by
+                modifying MUI styles, addressing 3 customer complains.
               </ExperienceItem>
               <ExperienceItem>
-                Invented and implemented a new feature that increased user
-                engagement by 20%
+                Coded a CRUD page for administrators to manage surgical
+                operations using GraphQL and the Apollo Client.
               </ExperienceItem>
             </ExperienceCard>
             <ExperienceCard
-              subtitle="Meta"
-              title="Senior Software Engineer"
-              startDate="Dec 2010"
-              endDate="Nov 2023"
+              subtitle="Intellifusion Technologies"
+              title="Machine Learning Intern"
+              startDate="June 2023"
+              endDate="Aug 2023"
             >
               <ExperienceItem>
-                Using Spark and TensorFlow to build a recommendation engine,
-                increasing the company&apos;s revenue by 10x
+                Fine-tuned a Stable Diffusion model that assists the local
+                Police Department in identifying potential suspects by
+                generating photorealistic faces according to witness
+                descriptions of the suspect&apos;s facial features.
               </ExperienceItem>
               <ExperienceItem>
-                Invented the best AI for the humanity
+                Optimized vector attributes data storing scheme achieved a 99.7%
+                reduction in storing vectors and 85.6% in reading.
+              </ExperienceItem>
+              <ExperienceItem>
+                Created a user interface for the Stable Diffusion model using
+                the Huggingface Gradio framework.
+              </ExperienceItem>
+            </ExperienceCard>
+            <ExperienceCard
+              subtitle="Loovee Science & Technology Development Co., Ltd."
+              title="Software Engineer Intern"
+              startDate="June 2021"
+              endDate="Aug 2021"
+            >
+              <ExperienceItem>
+                Implemented a responsive SPA with React and Ant Design for a
+                shopping module that has 400+ daily downloads on IOS.
+              </ExperienceItem>
+              <ExperienceItem>
+                Created mobile web applications by communicating with designers
+                and requesting REST APIs.
+              </ExperienceItem>
+              <ExperienceItem>
+                Utilized priority queue data structure to optimize the
+                sequencing of pop-ups in the app using Vue.js.
               </ExperienceItem>
             </ExperienceCard>
           </Stack>
@@ -295,7 +323,7 @@ export default function Home() {
         </HomePageItem>
         <HomePageItem title="Projects">
           <ExperienceCard
-            title="Game AI"
+            title="Gomoku Game AI"
             startDate="May 2022"
             clickable
             action={() =>
