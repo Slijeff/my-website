@@ -15,6 +15,7 @@ import {
   IconButton,
   List,
   ListItem,
+  ListItemButton,
   ListItemIcon,
   Stack,
   Typography,
@@ -24,9 +25,8 @@ import {
 } from "@mui/material";
 import Box from "@mui/material/Box";
 import Grid from "@mui/material/Grid2";
-import Link from "next/link";
-import { usePathname } from "next/navigation";
-import { useState } from "react";
+import { usePathname, useRouter } from "next/navigation";
+import { createContext, useContext, useState } from "react";
 
 const MenuSections: { title: string; icon: React.ReactNode }[] = [
   {
@@ -67,28 +67,27 @@ const socialLinks = [
 
 interface HeaderLinkProps {
   text: string;
-  setDrawer?: React.Dispatch<React.SetStateAction<boolean>>;
 }
-function HeaderLink({ text, setDrawer = () => {} }: HeaderLinkProps) {
-  const pathName = usePathname();
-  const navigateTo = text === "Home" ? "/" : `/${text.toLowerCase()}`;
+function HeaderLink({ text }: HeaderLinkProps) {
+  const path = usePathname();
+  const router = useRouter();
   return (
-    <Box onClick={() => setDrawer && setDrawer(false)}>
-      <Link href={navigateTo}>
-        <Typography
-          variant="h6"
-          color={"primary"}
-          fontWeight={400}
-          sx={{
-            ":hover": {
-              textDecoration: "underline",
-            },
-            textDecoration: pathName === navigateTo ? "underline" : "none",
-          }}
-        >
-          {text}
-        </Typography>
-      </Link>
+    <Box onClick={() => router.push(`/${text.toLowerCase()}`)}>
+      <Typography
+        variant="h6"
+        color={"primary"}
+        fontWeight={400}
+        sx={{
+          ":hover": {
+            textDecoration: "underline",
+            cursor: "pointer",
+          },
+          textDecoration:
+            path === `/${text.toLowerCase()}` ? "underline" : "none",
+        }}
+      >
+        {text}
+      </Typography>
     </Box>
   );
 }
@@ -105,17 +104,9 @@ function HeaderLinkIcon({ icon, onClick }: HeaderLinkIconProps) {
   );
 }
 
-function HeaderContent({
-  isMobile,
-  openDrawer,
-  setOpenDrawer,
-}: {
-  isMobile: boolean;
-  openDrawer: boolean;
-  setOpenDrawer: React.Dispatch<React.SetStateAction<boolean>>;
-}) {
+function HeaderContent({ isMobile }: { isMobile: boolean }) {
   const { mode, setMode } = useColorScheme();
-
+  const { openDrawer, setOpenDrawer } = useContext(DrawerContext);
   return (
     <>
       {isMobile && (
@@ -130,9 +121,7 @@ function HeaderContent({
             }}
           >
             {MenuSections.map(({ title, icon }) => (
-              <MobileMenuListItemWrapper key={title} icon={icon}>
-                <HeaderLink text={title} setDrawer={setOpenDrawer} />
-              </MobileMenuListItemWrapper>
+              <MobileMenuListItem key={title} icon={icon} text={title} />
             ))}
           </List>
         </Drawer>
@@ -186,41 +175,70 @@ function HeaderContent({
   );
 }
 
-export default function Header() {
-  const theme = useTheme();
-  const isMobile = useMediaQuery(theme.breakpoints.down("md"));
+export const DrawerContext = createContext<{
+  openDrawer: boolean;
+  setOpenDrawer: React.Dispatch<React.SetStateAction<boolean>>;
+}>({
+  openDrawer: false,
+  setOpenDrawer: () => {},
+});
+
+export const DrawerStateProvider = ({
+  children,
+}: {
+  children: React.ReactNode;
+}) => {
   const [openDrawer, setOpenDrawer] = useState(false);
 
   return (
-    <Box
-      position="sticky"
-      height="64px"
-      sx={{
-        top: 0,
-        backdropFilter: "blur(4px)",
-        zIndex: 999,
-      }}
-    >
-      <HeaderContent
-        isMobile={isMobile}
-        openDrawer={openDrawer}
-        setOpenDrawer={setOpenDrawer}
-      />
-    </Box>
+    <DrawerContext.Provider value={{ openDrawer, setOpenDrawer }}>
+      {children}
+    </DrawerContext.Provider>
+  );
+};
+
+export default function Header() {
+  const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down("md"));
+
+  return (
+    <DrawerStateProvider>
+      <Box
+        position="sticky"
+        height="64px"
+        sx={{
+          top: 0,
+          backdropFilter: "blur(4px)",
+          zIndex: 999,
+        }}
+      >
+        <HeaderContent isMobile={isMobile} />
+      </Box>
+    </DrawerStateProvider>
   );
 }
 
-function MobileMenuListItemWrapper({
-  children,
+function MobileMenuListItem({
   icon,
+  text,
 }: {
-  children: React.ReactNode;
   icon: React.ReactNode;
+  text: string;
 }) {
+  const { setOpenDrawer } = useContext(DrawerContext);
+  const navigateTo = text === "Home" ? "/" : `/${text.toLowerCase()}`;
+  const router = useRouter();
   return (
-    <ListItem>
-      <ListItemIcon>{icon}</ListItemIcon>
-      {children}
+    <ListItem disablePadding>
+      <ListItemButton
+        onClick={() => {
+          setOpenDrawer(false);
+          router.push(navigateTo);
+        }}
+      >
+        <ListItemIcon>{icon}</ListItemIcon>
+        <HeaderLink text={text} />
+      </ListItemButton>
     </ListItem>
   );
 }
