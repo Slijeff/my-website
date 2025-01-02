@@ -34,13 +34,14 @@ const MenuSections: { title: string; icon: React.ReactNode }[] = [
     icon: <HomeIcon />,
   },
   {
-    title: "Blogs",
-    icon: <BookIcon />,
-  },
-  {
     title: "Contact",
     icon: <SendIcon />,
   },
+  {
+    title: "Blogs",
+    icon: <BookIcon />,
+  },
+
   {
     title: "Collections",
     icon: <BookmarkIcon />,

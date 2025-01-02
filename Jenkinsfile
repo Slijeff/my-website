@@ -2,16 +2,17 @@ pipeline {
     agent any
 
     stages {
-        stage('Cleanup') {
-            steps {
-                echo 'Cleaning up..'
-                sh 'docker container rm -f my-website || true'
-            }
-        }
+        
         stage('Build') {
             steps {
                 echo 'Building..'
                 sh 'docker build -t my-website:latest .'
+            }
+        }
+        stage('Cleanup') {
+            steps {
+                echo 'Cleaning up..'
+                sh 'docker container rm -f my-website || true'
             }
         }
         stage('Deploy') {
