@@ -6,7 +6,7 @@ export default function Footer() {
       gap={2}
       margin={"auto"}
       marginBottom={4}
-      width={{ xs: "80%", sm: "70%", lg: "40%" }}
+      width={{ xs: "90%", sm: "70%", lg: "40%" }}
     >
       <Divider variant="fullWidth" />
       <Typography

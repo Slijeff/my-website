@@ -5,7 +5,8 @@ import { Roboto } from "next/font/google";
 import { ThemeProvider } from "@mui/material/styles";
 import theme from "../theme";
 import Header from "./header";
-import { Box } from "@mui/material";
+import { Box, CssBaseline } from "@mui/material";
+
 import Footer from "./footer";
 
 const roboto = Roboto({
@@ -31,14 +32,15 @@ export default function RootLayout({
     <html lang="en">
       <body className={roboto.variable}>
         <AppRouterCacheProvider>
-          <ThemeProvider theme={theme}>
+          <ThemeProvider theme={theme} defaultMode="system">
+            <CssBaseline />
             <Header />
             <Box
-              width={{ xs: "80%", sm: "70%", lg: "40%" }}
+              width={{ xs: "90%", sm: "70%", lg: "40%" }}
               margin={"auto"}
-              padding={5}
+              padding={2}
             >
-              {children}
+              <main>{children}</main>
             </Box>
             <Footer />
           </ThemeProvider>
