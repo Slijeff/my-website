@@ -124,7 +124,11 @@ function HeaderContent({
           onClose={() => setOpenDrawer(false)}
           anchor="top"
         >
-          <List>
+          <List
+            sx={{
+              backgroundColor: "primary.contrastText",
+            }}
+          >
             {MenuSections.map(({ title, icon }) => (
               <MobileMenuListItemWrapper key={title} icon={icon}>
                 <HeaderLink text={title} setDrawer={setOpenDrawer} />
