@@ -1,21 +1,22 @@
 "use client";
+import CircleIcon from "@mui/icons-material/Circle";
 import {
   Box,
-  Stack,
-  Typography,
   Card,
+  CardActionArea,
   CardContent,
+  Chip,
   List,
   ListItem,
   ListItemIcon,
   ListItemText,
-  Chip,
-  CardActionArea,
+  Stack,
+  Typography,
+  useColorScheme,
 } from "@mui/material";
-import Image from "next/image";
 import Grid from "@mui/material/Grid2";
-import CircleIcon from "@mui/icons-material/Circle";
 import { motion } from "motion/react";
+import Image from "next/image";
 
 interface HomePageItemProps {
   title: string;
@@ -64,6 +65,7 @@ interface ExperienceCardProps {
   startDate: string;
   endDate?: string;
   clickable?: boolean;
+  action?: () => void;
 }
 function ExperienceCard({
   children,
@@ -72,6 +74,7 @@ function ExperienceCard({
   startDate,
   endDate,
   clickable = false,
+  action = () => {},
 }: ExperienceCardProps): React.ReactNode {
   const content = (
     <CardContent>
@@ -103,11 +106,19 @@ function ExperienceCard({
   );
   return (
     <Card
-      sx={{ minWidth: "100%" }}
+      sx={{
+        minWidth: "100%",
+        backgroundColor: "transparent",
+        backdropFilter: "blur(2px)",
+      }}
       variant={clickable ? "elevation" : "outlined"}
-      elevation={clickable ? 4 : undefined}
+      elevation={clickable ? 2 : undefined}
     >
-      {clickable ? <CardActionArea>{content}</CardActionArea> : content}
+      {clickable ? (
+        <CardActionArea onClick={action}>{content}</CardActionArea>
+      ) : (
+        content
+      )}
     </Card>
   );
 }
@@ -147,11 +158,17 @@ function SkillsItemLine({
 
 export default function Home() {
   const nameText = "Hi, I am Jeffrey Hui".split(" ");
+  const welcomeText = "Welcome to my page 👋".split(" ");
+  const { mode } = useColorScheme();
   return (
     <Stack gap={4} alignItems={"center"}>
       <Image
         style={{
           borderRadius: "10px",
+          boxShadow:
+            mode === "light"
+              ? "0 5px 10px var(--mui-palette-primary-main)"
+              : "",
         }}
         src="/avatar.png"
         alt="Avatar"
@@ -161,23 +178,44 @@ export default function Home() {
       />
 
       <Typography variant="h3" sx={{ fontWeight: 700 }}>
-        {nameText.map((el, i) => {
-          return (
-            <Box
-              component={motion.span}
-              key={i}
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{
-                duration: 0.6,
-                delay: i / 10,
-              }}
-            >
-              {el}{" "}
-            </Box>
-          );
-        })}
-        <Box>Welcome to my page 👋</Box>
+        <Stack>
+          <Box>
+            {nameText.map((el, i) => {
+              return (
+                <Box
+                  component={motion.span}
+                  key={i}
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  transition={{
+                    duration: 0.6,
+                    delay: i / 6,
+                  }}
+                >
+                  {el}{" "}
+                </Box>
+              );
+            })}
+          </Box>
+          <Box>
+            {welcomeText.map((el, i) => {
+              return (
+                <Box
+                  component={motion.span}
+                  key={i}
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  transition={{
+                    duration: 2,
+                    delay: i / 5,
+                  }}
+                >
+                  {el}{" "}
+                </Box>
+              );
+            })}
+          </Box>
+        </Stack>
       </Typography>
       <Stack
         direction="column"
@@ -256,7 +294,14 @@ export default function Home() {
           </Stack>
         </HomePageItem>
         <HomePageItem title="Projects">
-          <ExperienceCard title="Game AI" startDate="May 2022" clickable>
+          <ExperienceCard
+            title="Game AI"
+            startDate="May 2022"
+            clickable
+            action={() =>
+              window.open("https://github.com/Slijeff/game-ai", "_blank")
+            }
+          >
             <ExperienceItem>
               Developed an AI using Minimax algorithm to play the game of Gomoku
               then optimized with Alpha-Beta pruning algorithm and parallel

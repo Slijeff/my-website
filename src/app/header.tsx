@@ -1,4 +1,15 @@
 "use client";
+import BookIcon from "@mui/icons-material/Book";
+import BookmarkIcon from "@mui/icons-material/Bookmark";
+import DarkModeIcon from "@mui/icons-material/DarkMode";
+import GitHubIcon from "@mui/icons-material/GitHub";
+import HomeIcon from "@mui/icons-material/Home";
+import InstagramIcon from "@mui/icons-material/Instagram";
+import LightModeIcon from "@mui/icons-material/LightMode";
+import LinkedInIcon from "@mui/icons-material/LinkedIn";
+import MenuIcon from "@mui/icons-material/Menu";
+import SendIcon from "@mui/icons-material/Send";
+import TranslateIcon from "@mui/icons-material/Translate";
 import {
   Drawer,
   IconButton,
@@ -14,17 +25,6 @@ import {
 import Box from "@mui/material/Box";
 import Grid from "@mui/material/Grid2";
 import Link from "next/link";
-import GitHubIcon from "@mui/icons-material/GitHub";
-import LinkedInIcon from "@mui/icons-material/LinkedIn";
-import DarkModeIcon from "@mui/icons-material/DarkMode";
-import InstagramIcon from "@mui/icons-material/Instagram";
-import LightModeIcon from "@mui/icons-material/LightMode";
-import TranslateIcon from "@mui/icons-material/Translate";
-import MenuIcon from "@mui/icons-material/Menu";
-import HomeIcon from "@mui/icons-material/Home";
-import BookIcon from "@mui/icons-material/Book";
-import SendIcon from "@mui/icons-material/Send";
-import BookmarkIcon from "@mui/icons-material/Bookmark";
 import { usePathname } from "next/navigation";
 import { useState } from "react";
 
@@ -105,18 +105,34 @@ function HeaderLinkIcon({ icon, onClick }: HeaderLinkIconProps) {
   );
 }
 
-function DefaultHeader() {
+function HeaderContent({
+  isMobile,
+  openDrawer,
+  setOpenDrawer,
+}: {
+  isMobile: boolean;
+  openDrawer: boolean;
+  setOpenDrawer: React.Dispatch<React.SetStateAction<boolean>>;
+}) {
   const { mode, setMode } = useColorScheme();
+
   return (
-    <Box
-      position="sticky"
-      height="64px"
-      sx={{
-        top: 0,
-        backdropFilter: "blur(4px)",
-        transition: "all 0.5s ease-in-out",
-      }}
-    >
+    <>
+      {isMobile && (
+        <Drawer
+          open={openDrawer}
+          onClose={() => setOpenDrawer(false)}
+          anchor="top"
+        >
+          <List>
+            {MenuSections.map(({ title, icon }) => (
+              <MobileMenuListItemWrapper key={title} icon={icon}>
+                <HeaderLink text={title} setDrawer={setOpenDrawer} />
+              </MobileMenuListItemWrapper>
+            ))}
+          </List>
+        </Drawer>
+      )}
       <Grid
         container
         direction="row"
@@ -128,11 +144,17 @@ function DefaultHeader() {
         paddingRight={4}
       >
         <Grid size={5}>
-          <Stack width={"100%"} gap={3} direction="row" alignItems="center">
-            {MenuSections.map(({ title }) => (
-              <HeaderLink key={title} text={title} />
-            ))}
-          </Stack>
+          {isMobile ? (
+            <IconButton sx={{ padding: 0 }} onClick={() => setOpenDrawer(true)}>
+              <MenuIcon />
+            </IconButton>
+          ) : (
+            <Stack width={"100%"} gap={3} direction="row" alignItems="center">
+              {MenuSections.map(({ title }) => (
+                <HeaderLink key={title} text={title} />
+              ))}
+            </Stack>
+          )}
         </Grid>
         <Grid size={5}>
           <Stack
@@ -156,6 +178,30 @@ function DefaultHeader() {
           </Stack>
         </Grid>
       </Grid>
+    </>
+  );
+}
+
+export default function Header() {
+  const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down("md"));
+  const [openDrawer, setOpenDrawer] = useState(false);
+
+  return (
+    <Box
+      position="sticky"
+      height="64px"
+      sx={{
+        top: 0,
+        backdropFilter: "blur(4px)",
+        zIndex: 999,
+      }}
+    >
+      <HeaderContent
+        isMobile={isMobile}
+        openDrawer={openDrawer}
+        setOpenDrawer={setOpenDrawer}
+      />
     </Box>
   );
 }
@@ -173,78 +219,4 @@ function MobileMenuListItemWrapper({
       {children}
     </ListItem>
   );
-}
-
-function MobileHeader() {
-  const { mode, setMode } = useColorScheme();
-  const [openDrawer, setOpenDrawer] = useState(false);
-
-  return (
-    <Box
-      position="sticky"
-      height="64px"
-      sx={{
-        top: 0,
-        backdropFilter: "blur(4px)",
-        transition: "all 0.5s ease-in-out",
-      }}
-    >
-      <Drawer
-        open={openDrawer}
-        onClose={() => setOpenDrawer(false)}
-        anchor="top"
-      >
-        <List>
-          {MenuSections.map(({ title, icon }) => (
-            <MobileMenuListItemWrapper key={title} icon={icon}>
-              <HeaderLink text={title} setDrawer={setOpenDrawer} />
-            </MobileMenuListItemWrapper>
-          ))}
-        </List>
-      </Drawer>
-      <Grid
-        container
-        direction="row"
-        justifyContent="space-between"
-        alignItems="center"
-        sx={{ height: "100%" }}
-        padding={2}
-        paddingLeft={4}
-        paddingRight={4}
-      >
-        <Grid size={5}>
-          <IconButton sx={{ padding: 0 }} onClick={() => setOpenDrawer(true)}>
-            <MenuIcon />
-          </IconButton>
-        </Grid>
-        <Grid size={5}>
-          <Stack
-            width={"100%"}
-            gap={3}
-            direction="row-reverse"
-            alignItems="center"
-          >
-            <HeaderLinkIcon
-              onClick={() => setMode(mode === "dark" ? "light" : "dark")}
-              icon={mode === "dark" ? <LightModeIcon /> : <DarkModeIcon />}
-            />
-            <HeaderLinkIcon icon={<TranslateIcon />} />
-            {socialLinks.map(({ title, icon, link }) => (
-              <HeaderLinkIcon
-                key={title}
-                icon={icon}
-                onClick={() => window.open(link, "_blank")}
-              />
-            ))}
-          </Stack>
-        </Grid>
-      </Grid>
-    </Box>
-  );
-}
-
-export default function Header() {
-  const theme = useTheme();
-  const isMobile = useMediaQuery(theme.breakpoints.down("md"));
-  return isMobile ? <MobileHeader /> : <DefaultHeader />;
 }

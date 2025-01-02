@@ -2,18 +2,20 @@ body::before {
     content: "";
     inset: 0;
     position: absolute;
-    background: linear-gradient(90deg, var(--mui-palette-background-default) 22px, transparent 1%) 50%, 
-                linear-gradient(var(--mui-palette-background-default) 22px, transparent 1%) 50%,
+    background: linear-gradient(90deg, var(--mui-palette-common-background) 22px, transparent 1%) 50%, 
+                linear-gradient(var(--mui-palette-common-background) 22px, transparent 1%) 50%,
                 var(--mui-palette-grey-500);
     background-position: center center;
     background-size: 25px 25px;
-    mask-image: linear-gradient(0deg, transparent 30%, black);
+    mask-image: linear-gradient(0deg, transparent 5%, black);
     /* mask-image: linear-gradient(0deg, rgba(2,0,36,0) 00%, rgba(59,155,255,1) 100%); */
-    z-index: -2;
+    z-index: -1;
 }
 
 body {
     margin: 0;
+    background-color: var(--mui-palette-background-default);
+    overscroll-behavior: none;
 }
 
 a {

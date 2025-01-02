@@ -25,6 +25,9 @@ const theme = createTheme({
           light: grey["800"],
           lighter: grey["700"],
         },
+        background: {
+          default: "rgb(238 245 252)",
+        },
         tonalOffset: 0.5,
       },
     },
@@ -34,6 +37,9 @@ const theme = createTheme({
           main: grey["50"],
           light: grey["300"],
           lighter: grey["400"],
+        },
+        background: {
+          default: "#000",
         },
         tonalOffset: 0.5,
       },
