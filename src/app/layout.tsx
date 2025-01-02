@@ -1,19 +1,19 @@
-import "./global.css";
-import type { Metadata } from "next";
-import { AppRouterCacheProvider } from "@mui/material-nextjs/v15-appRouter";
-import { Roboto } from "next/font/google";
-import { ThemeProvider } from "@mui/material/styles";
-import theme from "../theme";
-import Header from "./header";
 import { Box, CssBaseline } from "@mui/material";
+import { AppRouterCacheProvider } from "@mui/material-nextjs/v15-appRouter";
+import { ThemeProvider } from "@mui/material/styles";
+import type { Metadata } from "next";
+import { Quicksand } from "next/font/google";
+import theme from "../theme";
+import "./global.css";
+import Header from "./header";
 
 import Footer from "./footer";
 
-const roboto = Roboto({
-  weight: ["100", "300", "400", "500", "700", "900"],
+const quicksand = Quicksand({
+  weight: ["300", "400", "500", "700"],
   subsets: ["latin"],
   display: "swap",
-  variable: "--font-roboto",
+  variable: "--font-quicksand",
 });
 
 export const metadata: Metadata = {
@@ -30,7 +30,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={roboto.variable}>
+      <body className={quicksand.variable}>
         <AppRouterCacheProvider>
           <ThemeProvider theme={theme} defaultMode="system">
             <CssBaseline />
