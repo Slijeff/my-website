@@ -5,7 +5,7 @@ pipeline {
         stage('Cleanup') {
             steps {
                 echo 'Cleaning up..'
-                sh 'docker container rm my-website'
+                sh 'docker container rm -f my-website || true'
             }
         }
         stage('Build') {
