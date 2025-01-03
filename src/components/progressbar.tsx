@@ -1,9 +1,14 @@
 import theme from "@/theme";
 import { Box } from "@mui/material";
-import { motion, useScroll } from "motion/react";
+import { motion, useScroll, useSpring } from "motion/react";
 
 export const ProgressBar = () => {
   const { scrollYProgress } = useScroll();
+  const springX = useSpring(scrollYProgress, {
+    stiffness: 100,
+    damping: 30,
+    restDelta: 0.001,
+  });
 
   return (
     <Box
@@ -19,7 +24,7 @@ export const ProgressBar = () => {
         zIndex: 999,
       }}
       style={{
-        scaleX: scrollYProgress,
+        scaleX: springX,
       }}
     />
   );

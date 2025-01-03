@@ -109,13 +109,20 @@ function ExperienceCard({
   return (
     <Card
       component={motion.div}
-      initial={{ x: 1000 }}
-      animate={{ x: 0 }}
-      transition={{
-        duration: 0.4,
-        ease: "easeOut",
-        type: "spring",
-        bounce: 0.2,
+      initial="offscreen"
+      whileInView={"onscreen"}
+      variants={{
+        offscreen: {
+          x: 300,
+        },
+        onscreen: {
+          x: 0,
+          transition: {
+            type: "spring",
+            bounce: 0.4,
+            duration: 0.8,
+          },
+        },
       }}
       sx={{
         minWidth: "100%",

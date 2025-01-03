@@ -39,6 +39,7 @@ export default function RootLayout({
               width={{ xs: "90%", sm: "70%", lg: "40%" }}
               margin={"auto"}
               padding={2}
+              overflow={"hidden"}
             >
               <main>{children}</main>
             </Box>
