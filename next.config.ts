@@ -5,6 +5,9 @@ const nextConfig: NextConfig = {
   output: "standalone",
   // distDir: "build",
   reactStrictMode: true,
+  experimental: {
+    scrollRestoration: true,
+  },
 
   async redirects() {
     return [

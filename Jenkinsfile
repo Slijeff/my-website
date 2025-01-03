@@ -13,6 +13,7 @@ pipeline {
             steps {
                 echo 'Cleaning up..'
                 sh 'docker container rm -f my-website || true'
+                sh 'yes | docker image prune'
             }
         }
         stage('Deploy') {

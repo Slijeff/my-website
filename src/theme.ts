@@ -1,5 +1,5 @@
 "use client";
-import { createTheme } from "@mui/material/styles";
+import { createTheme, responsiveFontSizes } from "@mui/material/styles";
 import { grey } from "@mui/material/colors";
 
 declare module "@mui/material/styles" {
@@ -12,7 +12,7 @@ declare module "@mui/material/styles" {
   }
 }
 
-const theme = createTheme({
+let theme = createTheme({
   cssVariables: {
     colorSchemeSelector: "class",
     disableCssColorScheme: true,
@@ -50,5 +50,7 @@ const theme = createTheme({
     fontFamily: "var(--font-quicksand)",
   },
 });
+
+theme = responsiveFontSizes(theme);
 
 export default theme;

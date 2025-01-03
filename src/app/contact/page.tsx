@@ -2,8 +2,8 @@ import { Paper, Stack, Typography } from "@mui/material";
 
 export default function Contact() {
   return (
-    <Stack gap={4} pt={2}>
-      <Typography variant="h3" fontWeight="bold">
+    <Stack gap={4} p={2}>
+      <Typography variant="h3" fontWeight="bold" letterSpacing={-1}>
         Contact Information
       </Typography>
       <Paper

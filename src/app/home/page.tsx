@@ -26,7 +26,7 @@ function HomePageItem({ children, title }: HomePageItemProps): React.ReactNode {
   return (
     <Grid gap={{ sm: 2, xs: 1 }} container width={"100%"}>
       <Grid size={{ sm: 3 }}>
-        <Typography variant="h5" sx={{ fontWeight: 500 }}>
+        <Typography variant="h5" fontWeight="bold">
           {title}
         </Typography>
       </Grid>
@@ -80,21 +80,22 @@ function ExperienceCard({
     <CardContent>
       <Stack gap={2}>
         <Stack gap={0}>
-          <Typography variant="body1" sx={{ fontWeight: 500 }}>
+          <Typography variant="body1" fontWeight="medium">
             {title}
           </Typography>
           {subtitle && (
             <Typography
               variant="body2"
-              sx={{ fontWeight: 300 }}
+              fontWeight="light"
               color="primary.lighter"
+              fontStyle="italic"
             >
               {subtitle}
             </Typography>
           )}
           <Typography
             variant="body2"
-            sx={{ fontWeight: 300 }}
+            fontWeight="light"
             color="primary.lighter"
           >
             {startDate} {endDate && `- ${endDate}`}
@@ -157,8 +158,8 @@ function SkillsItemLine({
 }
 
 export default function Home() {
-  const nameText = "Hi, I am Jeffrey Hui".split(" ");
-  const welcomeText = "Welcome to my page 👋".split(" ");
+  const nameText = "👋 I am Jeffrey Hui".split(" ");
+  const welcomeText = "Welcome to my page".split(" ");
   const { mode } = useColorScheme();
   return (
     <Stack gap={4} alignItems={"center"}>
@@ -177,7 +178,7 @@ export default function Home() {
         priority
       />
 
-      <Typography variant="h3" sx={{ fontWeight: 700 }}>
+      <Typography variant="h3" fontWeight="bold" letterSpacing={-1}>
         <Stack>
           <Box>
             {nameText.map((el, i) => {
@@ -226,7 +227,7 @@ export default function Home() {
         <HomePageItem title="About">
           <Typography
             variant="body1"
-            sx={{ fontWeight: 300 }}
+            fontWeight="regular"
             color="primary.light"
           >
             I am currently a software engineer at Geico. I am passionate about
