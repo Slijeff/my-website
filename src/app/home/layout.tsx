@@ -2,7 +2,7 @@
 
 import { ProgressBar } from "@/components/progressbar";
 
-export const PageLayout = ({ children }: { children: React.ReactNode }) => {
+const PageLayout = ({ children }: { children: React.ReactNode }) => {
   return (
     <>
       <ProgressBar />
