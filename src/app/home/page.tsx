@@ -67,6 +67,7 @@ interface ExperienceCardProps {
   clickable?: boolean;
   action?: () => void;
 }
+
 function ExperienceCard({
   children,
   title,
@@ -107,6 +108,15 @@ function ExperienceCard({
   );
   return (
     <Card
+      component={motion.div}
+      initial={{ x: 1000 }}
+      animate={{ x: 0 }}
+      transition={{
+        duration: 0.4,
+        ease: "easeOut",
+        type: "spring",
+        bounce: 0.2,
+      }}
       sx={{
         minWidth: "100%",
         backgroundColor: "transparent",
@@ -189,8 +199,9 @@ export default function Home() {
                   initial={{ opacity: 0 }}
                   animate={{ opacity: 1 }}
                   transition={{
-                    duration: 0.6,
+                    duration: 0.4,
                     delay: i / 6,
+                    ease: "easeIn",
                   }}
                 >
                   {el}{" "}
@@ -207,8 +218,9 @@ export default function Home() {
                   initial={{ opacity: 0 }}
                   animate={{ opacity: 1 }}
                   transition={{
-                    duration: 2,
-                    delay: i / 5,
+                    duration: 0.4,
+                    delay: 1.1 + i / 6,
+                    ease: "easeIn",
                   }}
                 >
                   {el}{" "}
