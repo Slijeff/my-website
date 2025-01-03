@@ -6,7 +6,6 @@ import { Quicksand } from "next/font/google";
 import theme from "../theme";
 import "./global.css";
 import Header from "./header";
-
 import Footer from "./footer";
 
 const quicksand = Quicksand({
@@ -41,7 +40,7 @@ export default function RootLayout({
               padding={2}
               overflow={"hidden"}
             >
-              <main>{children}</main>
+              {children}
             </Box>
             <Footer />
           </ThemeProvider>

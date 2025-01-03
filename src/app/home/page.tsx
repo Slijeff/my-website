@@ -1,4 +1,5 @@
-"use client";
+import AnimateOnScreenSlideIn from "@/customization/animateOnScreenSlideIn";
+import AnimateTextFadeIn from "@/customization/animateTextFadeIn";
 import CircleIcon from "@mui/icons-material/Circle";
 import {
   Box,
@@ -12,11 +13,10 @@ import {
   ListItemText,
   Stack,
   Typography,
-  useColorScheme,
 } from "@mui/material";
 import Grid from "@mui/material/Grid2";
-import { motion } from "motion/react";
-import Image from "next/image";
+import HomeAvatar from "./_client/homeAvatar";
+import ActionableExperienceCard from "./_client/experienceCard";
 
 interface HomePageItemProps {
   title: string;
@@ -65,7 +65,6 @@ interface ExperienceCardProps {
   startDate: string;
   endDate?: string;
   clickable?: boolean;
-  action?: () => void;
 }
 
 function ExperienceCard({
@@ -75,7 +74,6 @@ function ExperienceCard({
   startDate,
   endDate,
   clickable = false,
-  action = () => {},
 }: ExperienceCardProps): React.ReactNode {
   const content = (
     <CardContent>
@@ -108,23 +106,8 @@ function ExperienceCard({
   );
   return (
     <Card
-      component={motion.div}
-      initial="offscreen"
-      whileInView={"onscreen"}
-      variants={{
-        offscreen: {
-          x: "100%",
-        },
-        onscreen: {
-          x: 0,
-          transition: {
-            type: "spring",
-            bounce: 0.4,
-            duration: 0.8,
-            delay: 0.2,
-          },
-        },
-      }}
+      component={AnimateOnScreenSlideIn}
+      whileHover={{ scale: clickable ? 1.05 : undefined }}
       sx={{
         minWidth: "100%",
         backgroundColor: "transparent",
@@ -133,11 +116,7 @@ function ExperienceCard({
       variant={clickable ? "elevation" : "outlined"}
       elevation={clickable ? 2 : undefined}
     >
-      {clickable ? (
-        <CardActionArea onClick={action}>{content}</CardActionArea>
-      ) : (
-        content
-      )}
+      {clickable ? <CardActionArea>{content}</CardActionArea> : content}
     </Card>
   );
 }
@@ -176,65 +155,16 @@ function SkillsItemLine({
 }
 
 export default function Home() {
-  const nameText = "👋 I am Jeffrey Hui".split(" ");
-  const welcomeText = "Welcome to my page".split(" ");
-  const { mode } = useColorScheme();
   return (
     <Stack gap={4} alignItems={"center"}>
-      <Image
-        style={{
-          borderRadius: "10px",
-          boxShadow:
-            mode === "light"
-              ? "0 5px 10px var(--mui-palette-primary-main)"
-              : "",
-        }}
-        src="/avatar.png"
-        alt="Avatar"
-        width={200}
-        height={200}
-        priority
-      />
-
+      <HomeAvatar />
       <Typography variant="h3" fontWeight="bold" letterSpacing={-1}>
         <Stack>
           <Box>
-            {nameText.map((el, i) => {
-              return (
-                <Box
-                  component={motion.span}
-                  key={i}
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
-                  transition={{
-                    duration: 0.4,
-                    delay: i / 6,
-                    ease: "easeIn",
-                  }}
-                >
-                  {el}{" "}
-                </Box>
-              );
-            })}
+            <AnimateTextFadeIn>👋 I am Jeffrey Hui</AnimateTextFadeIn>
           </Box>
           <Box>
-            {welcomeText.map((el, i) => {
-              return (
-                <Box
-                  component={motion.span}
-                  key={i}
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
-                  transition={{
-                    duration: 0.4,
-                    delay: 1.1 + i / 6,
-                    ease: "easeIn",
-                  }}
-                >
-                  {el}{" "}
-                </Box>
-              );
-            })}
+            <AnimateTextFadeIn>Welcome to my page</AnimateTextFadeIn>
           </Box>
         </Stack>
       </Typography>
@@ -343,13 +273,10 @@ export default function Home() {
           </Stack>
         </HomePageItem>
         <HomePageItem title="Projects">
-          <ExperienceCard
+          <ActionableExperienceCard
             title="Gomoku Game AI"
             startDate="May 2022"
-            clickable
-            action={() =>
-              window.open("https://github.com/Slijeff/game-ai", "_blank")
-            }
+            actionLink="https://github.com/Slijeff/game-ai"
           >
             <ExperienceItem>
               Developed an AI using Minimax algorithm to play the game of Gomoku
@@ -365,7 +292,7 @@ export default function Home() {
               Deployed the app to an Oracle Cloud compute instance and
               simplified deployment using Docker and Docker Compose.
             </ExperienceItem>
-          </ExperienceCard>
+          </ActionableExperienceCard>
         </HomePageItem>
         <HomePageItem title="Skills">
           <Stack gap={2}>
