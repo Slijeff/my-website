@@ -43,7 +43,7 @@ const MenuSections: { title: string; icon: React.ReactNode }[] = [
   },
 
   {
-    title: "Collections",
+    title: "Archive",
     icon: <BookmarkIcon />,
   },
 ];
