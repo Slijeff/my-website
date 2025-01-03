@@ -164,7 +164,9 @@ export default function Home() {
             <AnimateTextFadeIn>👋 I am Jeffrey Hui</AnimateTextFadeIn>
           </Box>
           <Box>
-            <AnimateTextFadeIn>Welcome to my page</AnimateTextFadeIn>
+            <AnimateTextFadeIn additionalDelay={0.5}>
+              Welcome to my page
+            </AnimateTextFadeIn>
           </Box>
         </Stack>
       </Typography>
@@ -180,10 +182,12 @@ export default function Home() {
             fontWeight="regular"
             color="primary.light"
           >
-            I am currently a software engineer at Geico. I am passionate about
-            building user-friendly and accessible web applications. I am also
-            interested in contributing to open-source projects and working on
-            projects that align with my personal interests.
+            <AnimateTextFadeIn>
+              I am currently a software engineer at Geico. I am passionate about
+              building user-friendly and accessible web applications. I am also
+              interested in contributing to open-source projects and working on
+              projects that align with my personal interests.
+            </AnimateTextFadeIn>
           </Typography>
         </HomePageItem>
         <HomePageItem title="Experience">

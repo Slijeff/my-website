@@ -3,10 +3,13 @@ import { motion, MotionProps } from "motion/react";
 
 interface AnimateTextFadeInProps extends MotionProps {
   children: string;
+  duration?: number;
+  speed?: number;
   additionalDelay?: number;
 }
 export default function AnimateTextFadeIn({
   children,
+  duration = 0.4,
   additionalDelay = 0,
   ...props
 }: AnimateTextFadeInProps) {
@@ -21,8 +24,8 @@ export default function AnimateTextFadeIn({
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{
-              duration: 0.4,
-              delay: additionalDelay + i / 6,
+              duration: duration,
+              delay: additionalDelay + i / splittedText.length,
               ease: "easeIn",
             }}
             {...props}
