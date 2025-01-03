@@ -113,7 +113,7 @@ function ExperienceCard({
       whileInView={"onscreen"}
       variants={{
         offscreen: {
-          x: 300,
+          x: "100%",
         },
         onscreen: {
           x: 0,
@@ -121,6 +121,7 @@ function ExperienceCard({
             type: "spring",
             bounce: 0.4,
             duration: 0.8,
+            delay: 0.2,
           },
         },
       }}
