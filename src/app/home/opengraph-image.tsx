@@ -14,7 +14,7 @@ export default async function Image() {
   return new ImageResponse(
     (
       // ImageResponse JSX element
-      <OgBackground subtitle="Welcome"></OgBackground>
+      <OgBackground subtitle="Home @ Slijeff's Realm"></OgBackground>
     ),
     // ImageResponse options
     {
