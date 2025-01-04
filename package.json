@@ -6,7 +6,8 @@
     "dev": "next dev --turbopack",
     "build": "next build && cp -r public .next/standalone/ && cp -r .next/static .next/standalone/.next/",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "deploy": "git checkout deploy && git merge main && git push && git checkout main"
   },
   "dependencies": {
     "@emotion/cache": "^11.14.0",

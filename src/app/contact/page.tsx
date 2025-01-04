@@ -1,10 +1,11 @@
+import AnimateTextFadeIn from "@/customization/animateTextFadeIn";
 import { Paper, Stack, Typography } from "@mui/material";
 
 export default function Contact() {
   return (
     <Stack gap={4} p={2}>
       <Typography variant="h3" fontWeight="bold" letterSpacing={-1}>
-        Contact Information
+        <AnimateTextFadeIn>Contact Information</AnimateTextFadeIn>
       </Typography>
       <Paper
         sx={{
