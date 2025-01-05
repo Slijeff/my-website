@@ -6,6 +6,7 @@ pipeline {
         stage('Build') {
             steps {
                 echo 'Building..'
+                sh 'cp /mapped_config/my-website/.env .'
                 sh 'docker build -t my-website:latest .'
             }
         }
