@@ -2,6 +2,7 @@ import AnimateTextFadeIn from "@/customization/animateTextFadeIn";
 import { CollectionRaindrops, RaindropTag } from "@/types/archive";
 import {
   Box,
+  Button,
   Card,
   CardActionArea,
   CardContent,
@@ -13,6 +14,7 @@ import LinkIcon from "@mui/icons-material/Link";
 import Grid from "@mui/material/Grid2";
 import { limitWords } from "@/utils/utils";
 import TagIcon from "@mui/icons-material/Tag";
+import NavigateNextIcon from "@mui/icons-material/NavigateNext";
 
 export const revalidate = 60;
 
@@ -103,7 +105,7 @@ export default async function Archive() {
           </Stack>
         </Grid>
         <Grid size={{ xs: 12, sm: 4 }}>
-          <Stack direction={"column"} gap={2}>
+          <Stack direction={"column"} gap={2} alignItems={"flex-start"}>
             <Stack direction={"row"} alignItems={"center"}>
               <TagIcon sx={{ fontSize: "24px" }} />
               <Typography variant="h6" fontWeight="bold">
@@ -120,6 +122,9 @@ export default async function Archive() {
                 />
               ))}
             </Stack>
+            <Button variant="text" endIcon=<NavigateNextIcon />>
+              See all tags
+            </Button>
           </Stack>
         </Grid>
       </Grid>
