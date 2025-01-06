@@ -1,6 +1,6 @@
 import AnimateTextFadeIn from "@/customization/animateTextFadeIn";
 import { RaindropTag } from "@/types/archive";
-import { Button, Chip, Stack, Typography, Box } from "@mui/material";
+import { Button, Chip, Stack, Typography } from "@mui/material";
 import TagIcon from "@mui/icons-material/Tag";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 
