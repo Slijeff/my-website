@@ -16,8 +16,11 @@ const quicksand = Quicksand({
 });
 
 export const metadata: Metadata = {
-  title: "Slijeff's Realm",
-  metadataBase: new URL("https://me.slijeff.com"),
+  title: {
+    template: "%s | Slijeff's Realm",
+    default: "Slijeff's Realm",
+  },
+  metadataBase: new URL(`${process.env.PRODUCTION_METADATA_BASE}`),
   icons: {
     icon: "/favicon.ico",
   },
