@@ -3,6 +3,7 @@ import { RaindropTag } from "@/types/archive";
 import { Button, Chip, Stack, Typography } from "@mui/material";
 import TagIcon from "@mui/icons-material/Tag";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
+import Link from "next/link";
 
 export const revalidate = 60;
 
@@ -55,7 +56,7 @@ export default async function TagsPage() {
               label={`#${tag._id} (${tag.count})`}
               variant="outlined"
               clickable
-              component="a"
+              component={Link}
               href={`/archive/tag/${tag._id}`}
             />
           ))}

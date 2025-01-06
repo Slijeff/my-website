@@ -7,6 +7,7 @@ import {
   CardActionArea,
   CardContent,
   Chip,
+  Link,
   Stack,
   Typography,
 } from "@mui/material";
@@ -124,7 +125,12 @@ export default async function Archive() {
                 />
               ))}
             </Stack>
-            <Button variant="text" endIcon={<NavigateNextIcon />} href="/archive/tag">
+            <Button
+              variant="text"
+              endIcon={<NavigateNextIcon />}
+              LinkComponent={Link}
+              href="/archive/tag"
+            >
               See all tags
             </Button>
           </Stack>

@@ -20,8 +20,6 @@ import {
   Stack,
   Typography,
   useColorScheme,
-  useMediaQuery,
-  useTheme,
 } from "@mui/material";
 import Box from "@mui/material/Box";
 import Grid from "@mui/material/Grid2";
@@ -105,28 +103,27 @@ function HeaderLinkIcon({ icon, onClick }: HeaderLinkIconProps) {
   );
 }
 
-function HeaderContent({ isMobile }: { isMobile: boolean }) {
+function HeaderContent() {
   const { mode, setMode } = useColorScheme();
   const { openDrawer, setOpenDrawer } = useContext(DrawerContext);
   return (
     <>
-      {isMobile && (
-        <Drawer
-          open={openDrawer}
-          onClose={() => setOpenDrawer(false)}
-          anchor="top"
+      <Drawer
+        open={openDrawer}
+        onClose={() => setOpenDrawer(false)}
+        anchor="top"
+        sx={{ display: { xs: "block", sm: "none" } }}
+      >
+        <List
+          sx={{
+            backgroundColor: "primary.contrastText",
+          }}
         >
-          <List
-            sx={{
-              backgroundColor: "primary.contrastText",
-            }}
-          >
-            {MenuSections.map(({ title, icon }) => (
-              <MobileMenuListItem key={title} icon={icon} text={title} />
-            ))}
-          </List>
-        </Drawer>
-      )}
+          {MenuSections.map(({ title, icon }) => (
+            <MobileMenuListItem key={title} icon={icon} text={title} />
+          ))}
+        </List>
+      </Drawer>
       <Grid
         container
         direction="row"
@@ -138,17 +135,26 @@ function HeaderContent({ isMobile }: { isMobile: boolean }) {
         paddingRight={4}
       >
         <Grid size={5}>
-          {isMobile ? (
-            <IconButton sx={{ padding: 0 }} onClick={() => setOpenDrawer(true)}>
-              <MenuIcon />
-            </IconButton>
-          ) : (
-            <Stack width={"100%"} gap={3} direction="row" alignItems="center">
-              {MenuSections.map(({ title }) => (
-                <HeaderLink key={title} text={title} />
-              ))}
-            </Stack>
-          )}
+          <IconButton
+            sx={{
+              padding: 0,
+              display: { xs: "block", sm: "none" },
+            }}
+            onClick={() => setOpenDrawer(true)}
+          >
+            <MenuIcon />
+          </IconButton>
+          <Stack
+            width={"100%"}
+            gap={3}
+            direction="row"
+            alignItems="center"
+            display={{ xs: "none", sm: "flex" }}
+          >
+            {MenuSections.map(({ title }) => (
+              <HeaderLink key={title} text={title} />
+            ))}
+          </Stack>
         </Grid>
         <Grid size={5}>
           <Stack
@@ -199,9 +205,6 @@ export const DrawerStateProvider = ({
 };
 
 export default function Header() {
-  const theme = useTheme();
-  const isMobile = useMediaQuery(theme.breakpoints.down("md"));
-
   return (
     <DrawerStateProvider>
       <Box
@@ -213,7 +216,7 @@ export default function Header() {
           zIndex: 999,
         }}
       >
-        <HeaderContent isMobile={isMobile} />
+        <HeaderContent />
       </Box>
     </DrawerStateProvider>
   );

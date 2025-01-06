@@ -6,6 +6,7 @@ import {
   CardActionArea,
   CardContent,
   Chip,
+  Link,
   Stack,
   Typography,
 } from "@mui/material";
@@ -55,6 +56,7 @@ export default async function TagPage({ params }: TagPageProps) {
         variant="text"
         startIcon={<ArrowBackIcon />}
         href="/archive"
+        LinkComponent={Link}
         sx={{ alignSelf: "flex-start" }}
       >
         Back to Archive
