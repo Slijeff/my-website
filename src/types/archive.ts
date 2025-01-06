@@ -41,3 +41,8 @@ export type CollectionRaindrops = {
   result: boolean;
   items: Raindrop[];
 };
+
+export type RaindropTag = {
+  _id: string;
+  count: number;
+};
