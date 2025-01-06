@@ -1,5 +1,5 @@
-import OgBackground from "@/customization/ogBackground";
-import { ImageResponse } from "next/og";
+import OgBackground from '@/customization/ogBackground';
+import { ImageResponse } from 'next/og';
 
 // Image metadata
 export const size = {
@@ -7,7 +7,7 @@ export const size = {
   height: 630,
 };
 
-export const contentType = "image/png";
+export const contentType = 'image/png';
 
 // Image generation
 export default async function Image() {
@@ -21,6 +21,6 @@ export default async function Image() {
       // For convenience, we can re-use the exported opengraph-image
       // size config to also set the ImageResponse's width and height.
       ...size,
-    }
+    },
   );
 }

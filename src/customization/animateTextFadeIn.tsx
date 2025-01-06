@@ -1,5 +1,5 @@
-"use client";
-import { motion, MotionProps } from "motion/react";
+'use client';
+import { motion, MotionProps } from 'motion/react';
 
 interface AnimateTextFadeInProps extends MotionProps {
   children: string;
@@ -13,7 +13,7 @@ export default function AnimateTextFadeIn({
   additionalDelay = 0,
   ...props
 }: AnimateTextFadeInProps) {
-  const splittedText = children.split(" ");
+  const splittedText = children.split(' ');
 
   return (
     <>
@@ -26,11 +26,11 @@ export default function AnimateTextFadeIn({
             transition={{
               duration: duration,
               delay: additionalDelay + i / splittedText.length,
-              ease: "easeIn",
+              ease: 'easeIn',
             }}
             {...props}
           >
-            {el + " "}
+            {el + ' '}
           </motion.span>
         );
       })}

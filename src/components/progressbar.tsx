@@ -1,8 +1,8 @@
-"use client";
-import theme from "@/theme";
-import { Box } from "@mui/material";
-import { motion, useScroll, useSpring } from "motion/react";
-import { useEffect, useState } from "react";
+'use client';
+import theme from '@/theme';
+import { Box } from '@mui/material';
+import { motion, useScroll, useSpring } from 'motion/react';
+import { useEffect, useState } from 'react';
 
 export const ProgressBar = () => {
   const { scrollYProgress } = useScroll();
@@ -10,14 +10,16 @@ export const ProgressBar = () => {
 
   useEffect(() => {
     const checkScroll = () => {
-      setNeedsScroll(document.documentElement.scrollHeight > window.innerHeight);
+      setNeedsScroll(
+        document.documentElement.scrollHeight > window.innerHeight,
+      );
     };
-    
+
     // Check on mount and window resize
     checkScroll();
-    window.addEventListener("resize", checkScroll);
-    
-    return () => window.removeEventListener("resize", checkScroll);
+    window.addEventListener('resize', checkScroll);
+
+    return () => window.removeEventListener('resize', checkScroll);
   }, []);
 
   const scaleX = useSpring(scrollYProgress, {
@@ -33,13 +35,13 @@ export const ProgressBar = () => {
       component={motion.div}
       style={{ scaleX }}
       sx={{
-        position: "fixed",
-        top: "64px",
+        position: 'fixed',
+        top: '64px',
         left: 0,
         right: 0,
-        height: "4px",
+        height: '4px',
         background: theme.palette.primary.lighter,
-        transformOrigin: "0%",
+        transformOrigin: '0%',
         zIndex: 1000,
       }}
     />

@@ -1,5 +1,5 @@
-"use client";
-import { motion, MotionProps } from "motion/react";
+'use client';
+import { motion, MotionProps } from 'motion/react';
 
 interface AnimateOnScreenSlideInProps extends MotionProps {
   children: React.ReactNode;
@@ -13,17 +13,17 @@ export default function AnimateOnScreenSlideIn({
       {...props}
       initial="offscreen"
       whileInView="onscreen"
-      viewport={{ once: false, amount: "some" }}
+      viewport={{ once: false, amount: 'some' }}
       variants={{
         offscreen: {
-          x: "100%",
+          x: '100%',
           opacity: 0,
         },
         onscreen: {
           x: 0,
           opacity: 1,
           transition: {
-            type: "spring",
+            type: 'spring',
             bounce: 0.4,
             duration: 0.8,
             delay: 0.2,

@@ -1,6 +1,6 @@
-"use client";
+'use client';
 
-import AnimateOnScreenSlideIn from "@/customization/animateOnScreenSlideIn";
+import AnimateOnScreenSlideIn from '@/customization/animateOnScreenSlideIn';
 import {
   CardContent,
   Stack,
@@ -8,7 +8,7 @@ import {
   List,
   Card,
   CardActionArea,
-} from "@mui/material";
+} from '@mui/material';
 interface ExperienceCardProps {
   children: React.ReactNode;
   title: string;
@@ -60,14 +60,14 @@ export default function ActionableExperienceCard({
       component={AnimateOnScreenSlideIn}
       whileHover={{ scale: 1.05 }}
       sx={{
-        minWidth: "100%",
-        backgroundColor: "transparent",
-        backdropFilter: "blur(2px)",
+        minWidth: '100%',
+        backgroundColor: 'transparent',
+        backdropFilter: 'blur(2px)',
       }}
-      variant={"elevation"}
+      variant={'elevation'}
       elevation={2}
     >
-      <CardActionArea onClick={() => window.open(actionLink, "_blank")}>
+      <CardActionArea onClick={() => window.open(actionLink, '_blank')}>
         {content}
       </CardActionArea>
     </Card>

@@ -1,4 +1,4 @@
-import { CollectionRaindrops } from "@/types/archive";
+import { CollectionRaindrops } from '@/types/archive';
 import {
   Box,
   Button,
@@ -9,12 +9,12 @@ import {
   Link,
   Stack,
   Typography,
-} from "@mui/material";
-import LinkIcon from "@mui/icons-material/Link";
-import Grid from "@mui/material/Grid2";
-import { limitWords } from "@/utils/utils";
-import AnimateTextFadeIn from "@/customization/animateTextFadeIn";
-import ArrowBackIcon from "@mui/icons-material/ArrowBack";
+} from '@mui/material';
+import LinkIcon from '@mui/icons-material/Link';
+import Grid from '@mui/material/Grid2';
+import { limitWords } from '@/utils/utils';
+import AnimateTextFadeIn from '@/customization/animateTextFadeIn';
+import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 
 export const revalidate = 60;
 
@@ -24,15 +24,15 @@ interface TagPageProps {
 
 export async function generateStaticParams(): Promise<{ tag: string }[]> {
   const tagsData: { result: boolean; items: { _id: string }[] } = await fetch(
-    "https://api.raindrop.io/rest/v1/tags/51239720",
+    'https://api.raindrop.io/rest/v1/tags/51239720',
     {
       headers: {
         Authorization: `Bearer ${process.env.RAINDROP_TOKEN}`,
       },
-    }
-  ).then((res) => res.json());
+    },
+  ).then(res => res.json());
 
-  return tagsData.items.map((tag) => ({
+  return tagsData.items.map(tag => ({
     tag: tag._id,
   }));
 }
@@ -45,8 +45,8 @@ export default async function TagPage({ params }: TagPageProps) {
       headers: {
         Authorization: `Bearer ${process.env.RAINDROP_TOKEN}`,
       },
-    }
-  ).then((res) => res.json());
+    },
+  ).then(res => res.json());
 
   const items = collectionData.items;
 
@@ -57,7 +57,7 @@ export default async function TagPage({ params }: TagPageProps) {
         startIcon={<ArrowBackIcon />}
         href="/archive"
         LinkComponent={Link}
-        sx={{ alignSelf: "flex-start" }}
+        sx={{ alignSelf: 'flex-start' }}
       >
         Back to Archive
       </Button>
@@ -67,7 +67,7 @@ export default async function TagPage({ params }: TagPageProps) {
       <Typography
         variant="h6"
         color="primary.light"
-        fontStyle={"italic"}
+        fontStyle={'italic'}
         fontWeight="regular"
       >
         <AnimateTextFadeIn>
@@ -77,13 +77,13 @@ export default async function TagPage({ params }: TagPageProps) {
       <Grid container spacing={2}>
         <Grid size={{ xs: 12 }}>
           <Stack gap={2}>
-            {items.map((item) => (
+            {items.map(item => (
               <Card
                 key={item._id}
                 variant="outlined"
                 sx={{
-                  backdropFilter: "blur(4px)",
-                  backgroundColor: "transparent",
+                  backdropFilter: 'blur(4px)',
+                  backgroundColor: 'transparent',
                 }}
               >
                 <CardActionArea
@@ -92,29 +92,29 @@ export default async function TagPage({ params }: TagPageProps) {
                   rel="noopener noreferrer"
                 >
                   <CardContent sx={{ p: 1 }}>
-                    <Stack gap={1} direction={"column"}>
+                    <Stack gap={1} direction={'column'}>
                       <Box>
                         <Typography variant="body2">
-                          Archived on{" "}
+                          Archived on{' '}
                           {new Date(item.created).toLocaleDateString()}
                         </Typography>
-                        <Typography variant="body1" fontWeight={"bold"}>
+                        <Typography variant="body1" fontWeight={'bold'}>
                           {item.title}
                           <LinkIcon
                             sx={{
-                              color: "primary.lighter",
-                              fontSize: "inherit",
+                              color: 'primary.lighter',
+                              fontSize: 'inherit',
                             }}
                           />
                         </Typography>
-                        <Typography variant="body2" fontStyle={"italic"}>
+                        <Typography variant="body2" fontStyle={'italic'}>
                           {limitWords(item.excerpt, 25)}
                         </Typography>
                       </Box>
 
-                      <Stack direction={"row"} gap={1} overflow={"auto"}>
-                        {item.tags.map((tag) => (
-                          <Chip key={tag} label={"#" + tag} size="small" />
+                      <Stack direction={'row'} gap={1} overflow={'auto'}>
+                        {item.tags.map(tag => (
+                          <Chip key={tag} label={'#' + tag} size="small" />
                         ))}
                       </Stack>
                     </Stack>

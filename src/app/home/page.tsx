@@ -1,6 +1,6 @@
-import AnimateOnScreenSlideIn from "@/customization/animateOnScreenSlideIn";
-import AnimateTextFadeIn from "@/customization/animateTextFadeIn";
-import CircleIcon from "@mui/icons-material/Circle";
+import AnimateOnScreenSlideIn from '@/customization/animateOnScreenSlideIn';
+import AnimateTextFadeIn from '@/customization/animateTextFadeIn';
+import CircleIcon from '@mui/icons-material/Circle';
 import {
   Box,
   Card,
@@ -13,10 +13,10 @@ import {
   ListItemText,
   Stack,
   Typography,
-} from "@mui/material";
-import Grid from "@mui/material/Grid2";
-import HomeAvatar from "./_client/homeAvatar";
-import ActionableExperienceCard from "./_client/experienceCard";
+} from '@mui/material';
+import Grid from '@mui/material/Grid2';
+import HomeAvatar from './_client/homeAvatar';
+import ActionableExperienceCard from './_client/experienceCard';
 
 interface HomePageItemProps {
   title: string;
@@ -24,14 +24,14 @@ interface HomePageItemProps {
 }
 function HomePageItem({ children, title }: HomePageItemProps): React.ReactNode {
   return (
-    <Grid gap={{ sm: 2, xs: 1 }} container width={"100%"}>
+    <Grid gap={{ sm: 2, xs: 1 }} container width={'100%'}>
       <Grid size={{ sm: 3 }}>
         <Typography variant="h5" fontWeight="bold">
           {title}
         </Typography>
       </Grid>
 
-      <Grid size={{ sm: "grow" }} width={"100%"}>
+      <Grid size={{ sm: 'grow' }} width={'100%'}>
         {children}
       </Grid>
     </Grid>
@@ -45,7 +45,7 @@ function ExperienceItem({ children }: ExperienceItemProps): React.ReactNode {
   return (
     <>
       <ListItem disableGutters disablePadding alignItems="flex-start">
-        <ListItemIcon sx={{ fontSize: "6px", minWidth: "16px" }}>
+        <ListItemIcon sx={{ fontSize: '6px', minWidth: '16px' }}>
           <CircleIcon fontSize="inherit" />
         </ListItemIcon>
         <ListItemText>
@@ -109,11 +109,11 @@ function ExperienceCard({
       component={AnimateOnScreenSlideIn}
       whileHover={{ scale: clickable ? 1.05 : undefined }}
       sx={{
-        minWidth: "100%",
-        backgroundColor: "transparent",
-        backdropFilter: "blur(2px)",
+        minWidth: '100%',
+        backgroundColor: 'transparent',
+        backdropFilter: 'blur(2px)',
       }}
-      variant={clickable ? "elevation" : "outlined"}
+      variant={clickable ? 'elevation' : 'outlined'}
       elevation={clickable ? 2 : undefined}
     >
       {clickable ? <CardActionArea>{content}</CardActionArea> : content}
@@ -123,7 +123,7 @@ function ExperienceCard({
 
 function SkillsChip({ label }: { label: string }) {
   return (
-    <Chip variant="outlined" sx={{ width: "fit-content" }} label={label} />
+    <Chip variant="outlined" sx={{ width: 'fit-content' }} label={label} />
   );
 }
 
@@ -135,7 +135,7 @@ function SkillsItemLine({
   children: React.ReactNode;
 }) {
   return (
-    <Grid container spacing={1} direction={{ xs: "column", sm: "row" }}>
+    <Grid container spacing={1} direction={{ xs: 'column', sm: 'row' }}>
       <Grid size={{ xs: 12, sm: 4 }}>
         <Typography
           variant="body1"
@@ -146,7 +146,7 @@ function SkillsItemLine({
         </Typography>
       </Grid>
       <Grid size={{ xs: 12, sm: 8 }}>
-        <Stack gap={1} direction={"row"} flexWrap={"wrap"}>
+        <Stack gap={1} direction={'row'} flexWrap={'wrap'}>
           {children}
         </Stack>
       </Grid>
@@ -156,7 +156,7 @@ function SkillsItemLine({
 
 export default function Home() {
   return (
-    <Stack gap={4} alignItems={"center"}>
+    <Stack gap={4} alignItems={'center'}>
       <HomeAvatar />
       <Typography variant="h3" fontWeight="bold" letterSpacing={-1}>
         <Stack>

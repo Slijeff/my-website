@@ -1,21 +1,21 @@
-import AnimateTextFadeIn from "@/customization/animateTextFadeIn";
-import { RaindropTag } from "@/types/archive";
-import { Button, Chip, Stack, Typography } from "@mui/material";
-import TagIcon from "@mui/icons-material/Tag";
-import ArrowBackIcon from "@mui/icons-material/ArrowBack";
-import Link from "next/link";
+import AnimateTextFadeIn from '@/customization/animateTextFadeIn';
+import { RaindropTag } from '@/types/archive';
+import { Button, Chip, Stack, Typography } from '@mui/material';
+import TagIcon from '@mui/icons-material/Tag';
+import ArrowBackIcon from '@mui/icons-material/ArrowBack';
+import Link from 'next/link';
 
 export const revalidate = 60;
 
 export default async function TagsPage() {
   const tagsData: { result: boolean; items: RaindropTag[] } = await fetch(
-    "https://api.raindrop.io/rest/v1/tags/51239720",
+    'https://api.raindrop.io/rest/v1/tags/51239720',
     {
       headers: {
         Authorization: `Bearer ${process.env.RAINDROP_TOKEN}`,
       },
-    }
-  ).then((res) => res.json());
+    },
+  ).then(res => res.json());
   const tags = tagsData.items;
 
   return (
@@ -24,7 +24,7 @@ export default async function TagsPage() {
         variant="text"
         startIcon={<ArrowBackIcon />}
         href="/archive"
-        sx={{ alignSelf: "flex-start" }}
+        sx={{ alignSelf: 'flex-start' }}
       >
         Back to Archive
       </Button>
@@ -34,7 +34,7 @@ export default async function TagsPage() {
       <Typography
         variant="h6"
         color="primary.light"
-        fontStyle={"italic"}
+        fontStyle={'italic'}
         fontWeight="regular"
       >
         <AnimateTextFadeIn>
@@ -42,15 +42,15 @@ export default async function TagsPage() {
         </AnimateTextFadeIn>
       </Typography>
 
-      <Stack direction={"column"} gap={2}>
-        <Stack direction={"row"} alignItems={"center"}>
-          <TagIcon sx={{ fontSize: "24px" }} />
+      <Stack direction={'column'} gap={2}>
+        <Stack direction={'row'} alignItems={'center'}>
+          <TagIcon sx={{ fontSize: '24px' }} />
           <Typography variant="h6" fontWeight="bold">
             Available Tags
           </Typography>
         </Stack>
-        <Stack gap={1} direction={"row"} flexWrap={"wrap"}>
-          {tags.map((tag) => (
+        <Stack gap={1} direction={'row'} flexWrap={'wrap'}>
+          {tags.map(tag => (
             <Chip
               key={tag._id}
               label={`#${tag._id} (${tag.count})`}
