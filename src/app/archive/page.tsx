@@ -112,7 +112,12 @@ export default async function Archive() {
             </Stack>
             <Stack gap={1} direction={"row"} flexWrap={"wrap"}>
               {tags.map((tag) => (
-                <Chip key={tag._id} label={"#" + tag._id} variant="outlined" />
+                <Chip
+                  key={tag._id}
+                  label={"#" + tag._id}
+                  variant="outlined"
+                  clickable
+                />
               ))}
             </Stack>
           </Stack>
