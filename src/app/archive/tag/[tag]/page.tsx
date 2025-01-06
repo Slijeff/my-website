@@ -1,5 +1,4 @@
-import AnimateTextFadeIn from "@/customization/animateTextFadeIn";
-import { CollectionRaindrops, RaindropTag } from "@/types/archive";
+import { CollectionRaindrops } from "@/types/archive";
 import {
   Box,
   Button,
@@ -13,23 +12,17 @@ import {
 import LinkIcon from "@mui/icons-material/Link";
 import Grid from "@mui/material/Grid2";
 import { limitWords } from "@/utils/utils";
-import TagIcon from "@mui/icons-material/Tag";
-import NavigateNextIcon from "@mui/icons-material/NavigateNext";
+import AnimateTextFadeIn from "@/customization/animateTextFadeIn";
+import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 
 export const revalidate = 60;
 
-export default async function Archive() {
-  const collectionData: CollectionRaindrops = await fetch(
-    "https://api.raindrop.io/rest/v1/raindrops/51239720",
-    {
-      headers: {
-        Authorization: `Bearer ${process.env.RAINDROP_TOKEN}`,
-      },
-    }
-  ).then((res) => res.json());
-  const items = collectionData.items;
+interface TagPageProps {
+  params: Promise<{ tag: string }>;
+}
 
-  const tagsData: { result: boolean; items: RaindropTag[] } = await fetch(
+export async function generateStaticParams(): Promise<{ tag: string }[]> {
+  const tagsData: { result: boolean; items: { _id: string }[] } = await fetch(
     "https://api.raindrop.io/rest/v1/tags/51239720",
     {
       headers: {
@@ -37,11 +30,37 @@ export default async function Archive() {
       },
     }
   ).then((res) => res.json());
-  const tags = tagsData.items;
+
+  return tagsData.items.map((tag) => ({
+    tag: tag._id,
+  }));
+}
+
+export default async function TagPage({ params }: TagPageProps) {
+  const { tag } = await params;
+  const collectionData: CollectionRaindrops = await fetch(
+    `https://api.raindrop.io/rest/v1/raindrops/51239720?search=[{"key":"tag","val":"${tag}"}]`,
+    {
+      headers: {
+        Authorization: `Bearer ${process.env.RAINDROP_TOKEN}`,
+      },
+    }
+  ).then((res) => res.json());
+
+  const items = collectionData.items;
+
   return (
     <Stack gap={2}>
+      <Button
+        variant="text"
+        startIcon={<ArrowBackIcon />}
+        href="/archive"
+        sx={{ alignSelf: "flex-start" }}
+      >
+        Back to Archive
+      </Button>
       <Typography variant="h3" fontWeight="bold" letterSpacing={-1}>
-        <AnimateTextFadeIn>The Archive</AnimateTextFadeIn>
+        <AnimateTextFadeIn>{`#${tag}`}</AnimateTextFadeIn>
       </Typography>
       <Typography
         variant="h6"
@@ -50,12 +69,11 @@ export default async function Archive() {
         fontWeight="regular"
       >
         <AnimateTextFadeIn>
-          A place for me to share other links that I find interesting or useful.
-          Hope you like it!
+          {`Showing all items tagged with #${tag}`}
         </AnimateTextFadeIn>
       </Typography>
-      <Grid container spacing={2} direction={{ xs: "column", sm: "row" }}>
-        <Grid size={{ xs: 12, sm: 8 }}>
+      <Grid container spacing={2}>
+        <Grid size={{ xs: 12 }}>
           <Stack gap={2}>
             {items.map((item) => (
               <Card
@@ -102,31 +120,6 @@ export default async function Archive() {
                 </CardActionArea>
               </Card>
             ))}
-          </Stack>
-        </Grid>
-        <Grid size={{ xs: 12, sm: 4 }}>
-          <Stack direction={"column"} gap={2} alignItems={"flex-start"}>
-            <Stack direction={"row"} alignItems={"center"}>
-              <TagIcon sx={{ fontSize: "24px" }} />
-              <Typography variant="h6" fontWeight="bold">
-                Tags
-              </Typography>
-            </Stack>
-            <Stack gap={1} direction={"row"} flexWrap={"wrap"}>
-              {tags.map((tag) => (
-                <Chip
-                  key={tag._id}
-                  label={"#" + tag._id}
-                  variant="outlined"
-                  clickable
-                  component="a"
-                  href={`/archive/tag/${tag._id}`}
-                />
-              ))}
-            </Stack>
-            <Button variant="text" endIcon={<NavigateNextIcon />} href="/archive/tag">
-              See all tags
-            </Button>
           </Stack>
         </Grid>
       </Grid>

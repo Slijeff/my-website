@@ -1,7 +1,12 @@
-// "use client";
+import {ProgressBar} from "@/components/progressbar";
 
 const PageLayout = ({ children }: { children: React.ReactNode }) => {
-  return <>{children}</>;
+  return (
+    <>
+      <ProgressBar />
+      {children}
+    </>
+  );
 };
 
 export default PageLayout;
