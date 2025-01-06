@@ -7,6 +7,7 @@ const nextConfig: NextConfig = {
   reactStrictMode: true,
   experimental: {
     scrollRestoration: true,
+    optimizePackageImports: ['@emotion/react', '@emotion/styled'],
   },
 
   async redirects() {
@@ -19,5 +20,4 @@ const nextConfig: NextConfig = {
     ];
   },
 };
-
 export default nextConfig;
