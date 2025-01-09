@@ -120,7 +120,7 @@ export default async function Archive() {
                   label={'#' + tag._id}
                   variant="outlined"
                   clickable
-                  component="a"
+                  component={Link}
                   href={`/archive/tag/${tag._id}`}
                 />
               ))}

@@ -17,6 +17,7 @@ import AnimateTextFadeIn from '@/customization/animateTextFadeIn';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 
 export const revalidate = 60;
+export const dynamicParams = false;
 
 interface TagPageProps {
   params: Promise<{ tag: string }>;

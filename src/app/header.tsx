@@ -9,7 +9,6 @@ import LightModeIcon from '@mui/icons-material/LightMode';
 import LinkedInIcon from '@mui/icons-material/LinkedIn';
 import MenuIcon from '@mui/icons-material/Menu';
 import SendIcon from '@mui/icons-material/Send';
-import TranslateIcon from '@mui/icons-material/Translate';
 import {
   Drawer,
   IconButton,
@@ -167,7 +166,6 @@ function HeaderContent() {
               onClick={() => setMode(mode === 'dark' ? 'light' : 'dark')}
               icon={mode === 'dark' ? <LightModeIcon /> : <DarkModeIcon />}
             />
-            <HeaderLinkIcon icon={<TranslateIcon />} />
             {socialLinks.map(({ title, icon, link }) => (
               <HeaderLinkIcon
                 key={title}

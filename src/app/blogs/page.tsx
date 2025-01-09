@@ -4,13 +4,18 @@ import {
   Card,
   CardActionArea,
   CardContent,
+  Chip,
   Stack,
   Typography,
 } from '@mui/material';
 import Grid from '@mui/material/Grid2';
 import TagIcon from '@mui/icons-material/Tag';
+import { getAllPostsMeta } from '@/utils/blog';
+import Link from 'next/link';
 
-export default function Blogs() {
+export default async function Blogs() {
+  const postsData = await getAllPostsMeta();
+  const allTags = postsData.map(post => post.tags).flat();
   return (
     <Stack gap={2}>
       <Typography variant="h3" fontWeight="bold" letterSpacing={-1}>
@@ -34,27 +39,40 @@ export default function Blogs() {
                 backgroundColor: 'transparent',
               }}
             >
-              <CardActionArea
-                href="#"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <CardContent sx={{ p: 1 }}>
-                  <Stack gap={1} direction="column">
-                    <Box>
-                      <Typography variant="body2">
-                        Published on {new Date().toLocaleDateString()}
-                      </Typography>
-                      <Typography variant="body1" fontWeight="bold">
-                        Blog Title
-                      </Typography>
-                      <Typography variant="body2" fontStyle="italic">
-                        A brief description of the blog content goes here...
-                      </Typography>
-                    </Box>
-                  </Stack>
-                </CardContent>
-              </CardActionArea>
+              {postsData.map(post => (
+                <CardActionArea
+                  key={post.slug}
+                  href={`/blogs/${post.filename}`}
+                  LinkComponent={Link}
+                >
+                  <CardContent sx={{ p: 1 }}>
+                    <Stack gap={1} direction="column">
+                      <Box>
+                        <Stack direction={'row'} gap={1}>
+                          <Typography variant="body2">
+                            Published on {new Date().toLocaleDateString()}
+                          </Typography>
+                          <Typography variant="body2">
+                            • {post.readingTime} read
+                          </Typography>
+                        </Stack>
+
+                        <Typography variant="body1" fontWeight="bold">
+                          {post.title}
+                        </Typography>
+                        <Typography variant="body2" fontStyle="italic">
+                          {post.description}
+                        </Typography>
+                      </Box>
+                      <Stack direction={'row'} gap={1} overflow={'auto'}>
+                        {post.tags.map(tag => (
+                          <Chip key={tag} label={'#' + tag} size="small" />
+                        ))}
+                      </Stack>
+                    </Stack>
+                  </CardContent>
+                </CardActionArea>
+              ))}
             </Card>
           </Stack>
         </Grid>
@@ -67,7 +85,16 @@ export default function Blogs() {
               </Typography>
             </Stack>
             <Stack gap={1} direction="row" flexWrap="wrap">
-              {/* Add category chips or links here */}
+              {allTags.map(tag => (
+                <Chip
+                  key={tag}
+                  label={'#' + tag}
+                  variant="outlined"
+                  clickable
+                  component={Link}
+                  href={`/blogs/tag/${tag}`}
+                />
+              ))}
             </Stack>
           </Stack>
         </Grid>
