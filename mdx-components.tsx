@@ -1,6 +1,7 @@
 import { slugify, textContent } from '@/utils/blog';
-import { Link, Paper, Typography } from '@mui/material';
+import { Link as MuiLink, Paper, Typography } from '@mui/material';
 import type { MDXComponents } from 'mdx/types';
+import Link from 'next/link';
 
 export function useMDXComponents(components: MDXComponents): MDXComponents {
   return {
@@ -63,9 +64,9 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
       );
     },
     a: ({ children, href }) => (
-      <Link href={href} underline="always">
+      <MuiLink component={Link} href={href}>
         {children}
-      </Link>
+      </MuiLink>
     ),
     ...components,
   };

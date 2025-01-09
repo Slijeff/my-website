@@ -1,4 +1,7 @@
 import { getAllPostsMeta } from '@/utils/blog';
+import { Button } from '@mui/material';
+import ArrowBackIcon from '@mui/icons-material/ArrowBack';
+import Link from 'next/link';
 
 interface Path {
   blog: string;
@@ -25,5 +28,19 @@ export default async function BlogPostPage({ params }: StaticParamsWrapper) {
   const { blog } = await params;
   // Why importing the slug as the file name works?
   const { default: BlogPost } = await import(`@/posts/${blog}.mdx`);
-  return <BlogPost />;
+
+  return (
+    <>
+      <Button
+        variant="text"
+        startIcon={<ArrowBackIcon />}
+        href="/blogs"
+        LinkComponent={Link}
+        sx={{ alignSelf: 'flex-start' }}
+      >
+        Back to Blogs
+      </Button>
+      <BlogPost />{' '}
+    </>
+  );
 }

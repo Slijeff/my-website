@@ -4,9 +4,10 @@ import { ThemeProvider } from '@mui/material/styles';
 import type { Metadata } from 'next';
 import { Quicksand } from 'next/font/google';
 import theme from '../theme';
+import Footer from './footer';
 import './global.css';
 import Header from './header';
-import Footer from './footer';
+import { BackToTop } from '@/components/backToTop';
 
 const quicksand = Quicksand({
   weight: ['300', '400', '500', '700'],
@@ -46,6 +47,7 @@ export default function RootLayout({
             >
               {children}
             </Box>
+            <BackToTop />
             <Footer />
           </ThemeProvider>
         </AppRouterCacheProvider>
