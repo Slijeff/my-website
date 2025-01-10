@@ -45,6 +45,10 @@ export const getAllPostsMeta = async (): Promise<PostMetadata[]> => {
   return Promise.all(allPosts);
 };
 
+export const filterPostsByTag = (posts: PostMetadata[], tag: string) => {
+  return posts.filter(post => post.tags.includes(tag));
+};
+
 export function textContent(elem: React.ReactElement | string): string {
   if (!elem) {
     return '';

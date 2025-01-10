@@ -64,7 +64,7 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
       );
     },
     a: ({ children, href }) => (
-      <MuiLink component={Link} href={href}>
+      <MuiLink component={Link} href={href} passHref>
         {children}
       </MuiLink>
     ),

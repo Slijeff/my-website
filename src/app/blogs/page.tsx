@@ -50,7 +50,8 @@ export default async function Blogs() {
                       <Box>
                         <Stack direction={'row'} gap={1}>
                           <Typography variant="body2">
-                            Published on {new Date().toLocaleDateString()}
+                            Published on{' '}
+                            {new Date(post.time).toLocaleDateString()}
                           </Typography>
                           <Typography variant="body2">
                             • {post.readingTime} read

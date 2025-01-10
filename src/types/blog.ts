@@ -1,6 +1,6 @@
 export type PostMetadata = {
   title: string;
-  date: string;
+  time: string;
   description: string;
   tags: string[];
   slug: string;
