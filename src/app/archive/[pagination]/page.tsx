@@ -10,8 +10,9 @@ import Link from 'next/link';
 import NavigateNextIcon from '@mui/icons-material/NavigateNext';
 import TagIcon from '@mui/icons-material/Tag';
 import Grid from '@mui/material/Grid2';
+import { ArchivePagination } from '@/components/archivePagination';
 
-const PAGE_SIZE = 15;
+const PAGE_SIZE = 12;
 
 export async function generateStaticParams(): Promise<
   { pagination: string }[]
@@ -39,6 +40,16 @@ export const revalidate = 60;
 
 export default async function Archive({ params }: ArchivePageProps) {
   const { pagination } = await params;
+  const collectionInfo: CollectionInfo = await fetch(
+    'https://api.raindrop.io/rest/v1/collection/51239720',
+    {
+      headers: {
+        Authorization: `Bearer ${process.env.RAINDROP_TOKEN}`,
+      },
+    },
+  ).then(res => res.json());
+  const numRaindrops = collectionInfo.item.count;
+  const numPages = Math.ceil(numRaindrops / PAGE_SIZE);
   const collectionData: CollectionRaindrops = await fetch(
     `https://api.raindrop.io/rest/v1/raindrops/51239720?page=${pagination}&perpage=${PAGE_SIZE}`,
     {
@@ -80,6 +91,7 @@ export default async function Archive({ params }: ArchivePageProps) {
             {items.map(item => (
               <ArchiveCard key={item._id} item={item} />
             ))}
+            <ArchivePagination totalPage={numPages} />
           </Stack>
         </Grid>
         <Grid size={{ xs: 12, sm: 4 }}>
