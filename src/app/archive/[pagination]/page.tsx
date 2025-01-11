@@ -1,27 +1,46 @@
+import { ArchiveCard } from '@/components/archiveCard';
 import AnimateTextFadeIn from '@/customization/animateTextFadeIn';
-import { CollectionRaindrops, RaindropTag } from '@/types/archive';
 import {
-  Box,
-  Button,
-  Card,
-  CardActionArea,
-  CardContent,
-  Chip,
-  Link,
-  Stack,
-  Typography,
-} from '@mui/material';
-import LinkIcon from '@mui/icons-material/Link';
-import Grid from '@mui/material/Grid2';
-import { limitWords } from '@/utils/utils';
-import TagIcon from '@mui/icons-material/Tag';
+  CollectionInfo,
+  CollectionRaindrops,
+  RaindropTag,
+} from '@/types/archive';
+import { Stack, Typography, Chip, Button } from '@mui/material';
+import Link from 'next/link';
 import NavigateNextIcon from '@mui/icons-material/NavigateNext';
+import TagIcon from '@mui/icons-material/Tag';
+import Grid from '@mui/material/Grid2';
+
+const PAGE_SIZE = 15;
+
+export async function generateStaticParams(): Promise<
+  { pagination: string }[]
+> {
+  const collectionData: CollectionInfo = await fetch(
+    'https://api.raindrop.io/rest/v1/collection/51239720',
+    {
+      headers: {
+        Authorization: `Bearer ${process.env.RAINDROP_TOKEN}`,
+      },
+    },
+  ).then(res => res.json());
+  const numRaindrops = collectionData.item.count;
+  const numPages = Math.ceil(numRaindrops / PAGE_SIZE);
+  return Array.from({ length: numPages }, (_, i) => ({
+    pagination: i.toString(),
+  }));
+}
+
+interface ArchivePageProps {
+  params: Promise<{ pagination: string }>;
+}
 
 export const revalidate = 60;
 
-export default async function Archive() {
+export default async function Archive({ params }: ArchivePageProps) {
+  const { pagination } = await params;
   const collectionData: CollectionRaindrops = await fetch(
-    'https://api.raindrop.io/rest/v1/raindrops/51239720',
+    `https://api.raindrop.io/rest/v1/raindrops/51239720?page=${pagination}&perpage=${PAGE_SIZE}`,
     {
       headers: {
         Authorization: `Bearer ${process.env.RAINDROP_TOKEN}`,
@@ -59,49 +78,7 @@ export default async function Archive() {
         <Grid size={{ xs: 12, sm: 8 }}>
           <Stack gap={2}>
             {items.map(item => (
-              <Card
-                key={item._id}
-                variant="outlined"
-                sx={{
-                  backdropFilter: 'blur(4px)',
-                  backgroundColor: 'transparent',
-                }}
-              >
-                <CardActionArea
-                  href={item.link}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  <CardContent sx={{ p: 1 }}>
-                    <Stack gap={1} direction={'column'}>
-                      <Box>
-                        <Typography variant="body2">
-                          Archived on{' '}
-                          {new Date(item.created).toLocaleDateString()}
-                        </Typography>
-                        <Typography variant="body1" fontWeight={'bold'}>
-                          {item.title}
-                          <LinkIcon
-                            sx={{
-                              color: 'primary.lighter',
-                              fontSize: 'inherit',
-                            }}
-                          />
-                        </Typography>
-                        <Typography variant="body2" fontStyle={'italic'}>
-                          {limitWords(item.excerpt, 25)}
-                        </Typography>
-                      </Box>
-
-                      <Stack direction={'row'} gap={1} overflow={'auto'}>
-                        {item.tags.map(tag => (
-                          <Chip key={tag} label={'#' + tag} size="small" />
-                        ))}
-                      </Stack>
-                    </Stack>
-                  </CardContent>
-                </CardActionArea>
-              </Card>
+              <ArchiveCard key={item._id} item={item} />
             ))}
           </Stack>
         </Grid>

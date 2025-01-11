@@ -22,6 +22,11 @@ const nextConfig: NextConfig = {
         destination: '/home',
         permanent: true,
       },
+      {
+        source: '/archive',
+        destination: '/archive/0',
+        permanent: true,
+      },
     ];
   },
 };

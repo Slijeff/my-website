@@ -80,8 +80,9 @@ function HeaderLink({ text }: HeaderLinkProps) {
             textDecoration: 'underline',
             cursor: 'pointer',
           },
-          textDecoration:
-            path === `/${text.toLowerCase()}` ? 'underline' : 'none',
+          textDecoration: path.includes(text.toLowerCase())
+            ? 'underline'
+            : 'none',
         }}
       >
         {text}

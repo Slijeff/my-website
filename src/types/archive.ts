@@ -46,3 +46,33 @@ export type RaindropTag = {
   _id: string;
   count: number;
 };
+
+export type CollectionInfo = {
+  result: boolean;
+  item: {
+    _id: number;
+    access: {
+      for: number;
+      level: number;
+      root: boolean;
+      draggable: boolean;
+    };
+    author: boolean;
+    collaborators: {
+      $id: string;
+    };
+    color: string;
+    count: number;
+    cover: Array<string>;
+    created: string;
+    expanded: boolean;
+    lastUpdate: string;
+    public: boolean;
+    sort: number;
+    title: string;
+    user: {
+      $id: number;
+    };
+    view: string;
+  };
+};
