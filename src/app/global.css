@@ -17,6 +17,11 @@ body::before {
   mask-image: linear-gradient(0deg, transparent 50%, black);
   /* mask-image: linear-gradient(0deg, rgba(2,0,36,0) 00%, rgba(59,155,255,1) 100%); */
   z-index: -1;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
 }
 
 body {

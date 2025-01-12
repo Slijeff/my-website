@@ -14,8 +14,13 @@ import { getAllPostsMeta } from '@/utils/blog';
 import Link from 'next/link';
 
 export default async function Blogs() {
-  const postsData = await getAllPostsMeta();
-  const allTags = postsData.map(post => post.tags).flat();
+  const postsData = (await getAllPostsMeta()).sort((a, b) => {
+    if (new Date(a.time) < new Date(b.time)) {
+      return 1;
+    }
+    return -1;
+  });
+  const allTags = [...new Set(postsData.map(post => post.tags).flat())];
   return (
     <Stack gap={2}>
       <Typography variant="h3" fontWeight="bold" letterSpacing={-1}>
@@ -32,14 +37,15 @@ export default async function Blogs() {
       <Grid container spacing={2} direction={{ xs: 'column', sm: 'row' }}>
         <Grid size={{ xs: 12, sm: 8 }}>
           <Stack gap={2}>
-            <Card
-              variant="outlined"
-              sx={{
-                backdropFilter: 'blur(4px)',
-                backgroundColor: 'transparent',
-              }}
-            >
-              {postsData.map(post => (
+            {postsData.map(post => (
+              <Card
+                key={post.slug}
+                variant="outlined"
+                sx={{
+                  backdropFilter: 'blur(4px)',
+                  backgroundColor: 'transparent',
+                }}
+              >
                 <CardActionArea
                   key={post.slug}
                   href={`/blogs/${post.filename}`}
@@ -73,8 +79,8 @@ export default async function Blogs() {
                     </Stack>
                   </CardContent>
                 </CardActionArea>
-              ))}
-            </Card>
+              </Card>
+            ))}
           </Stack>
         </Grid>
         <Grid size={{ xs: 12, sm: 4 }}>
