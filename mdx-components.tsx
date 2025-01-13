@@ -16,7 +16,8 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
         fontWeight="bold"
         color="primary"
         id={slugify(children)}
-        lineHeight={1.5}
+        lineHeight={1}
+        sx={{ my: 1, width: 'fit-content', mx: 'auto' }}
       >
         {children}
       </Typography>
@@ -28,6 +29,7 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
         color="primary"
         id={slugify(children)}
         lineHeight={1.5}
+        sx={{ my: 1, width: 'fit-content', mx: 'auto' }}
       >
         {children}
       </Typography>
@@ -39,6 +41,7 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
         color="primary"
         id={slugify(children)}
         lineHeight={1.5}
+        sx={{ my: 1 }}
       >
         {children}
       </Typography>

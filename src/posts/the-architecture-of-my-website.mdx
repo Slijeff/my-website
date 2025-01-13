@@ -1,5 +1,5 @@
 export const metadata = {
-    title: "The Architecture of My Website",
+    title: "The Structure of My Website",
     time: "2025-01-11",
     tags: ['front-end', 'react', 'nextjs', 'test'],
     description: "An overview of how I built my website and the stack I used."
@@ -12,13 +12,31 @@ export const metadata = {
 ## Intro
 When I was writing this, I was a month apart from starting my job as a Software Engineer at Geico.
 Felling a bit bored, I decided to write a blog plus a website to document my journey, which should naturally
-take me about one month to complete.
+take me about one month to complete. The source code of this website is available on [GitHub](https://github.com/Slijeff/my-website).
 
 ## The Stack
+### Framework
 Since I'm most familiar with React, I wanted to use "plain" React at first (React + Vite). But I also wanted
 something more performant since this is going to be content-heavy instead of focusing on reactivity, so I settled on Next.js, which supports
-static-site-generation (SSG) and server-side-rendering (SSR).
+Static Site Generation (SSG), Server Side Rendering (SSR), and React Server Components (RSC). I was also considering
+SSG frameworks such as Hugo or Astro, but it means that I have to learn
+a whole new system that I'm not familiar with, which will be hard to debug when something goes wrong. 
+### Packages
+Other than React and Next, I also used [framer-motion](https://motion.dev/) for animations and [Material UI](https://mui.com) for UI components.
 
-\
+## The Structure
+### Home and Contact Section
+Those sections are pages without any dynamic content built using Next.js server components, which means the HTML
+for those pages can directly be generated at build time. However, since I'm using Motion to animate my Home page's text,
+if you look at the preview of downloaded HTML, you'll see blank text that have `opacity: 0`. Once the Motion Javascript is loaded, the text will be animated in.
+
+import MarkdownImageWrapper from "@/components/markdownImageWrapper";
+import html from "@/posts/images/website/pre-rendered-html.png";
+
+<MarkdownImageWrapper image={html} caption="The pre-rendered HTML for Home. The animated cards in other sections are blank. The skill section is shown
+because it doesn't have animation."/>
+
+As you can see from the screenshot, the pre-rendered HTML has everything ready other than the interactive parts and the font to be downloaded.
+
 \
 More Under Construction... 🚧

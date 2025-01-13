@@ -12,7 +12,7 @@ import TagIcon from '@mui/icons-material/Tag';
 import Grid from '@mui/material/Grid2';
 import { ArchivePagination } from '@/components/archivePagination';
 
-const PAGE_SIZE = 12;
+const PAGE_SIZE = 10;
 
 export async function generateStaticParams(): Promise<
   { pagination: string }[]
