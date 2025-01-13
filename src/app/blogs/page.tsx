@@ -1,6 +1,10 @@
 import AnimateTextFadeIn from '@/customization/animateTextFadeIn';
+import { getAllPostsMeta } from '@/utils/blog';
+import NavigateNextIcon from '@mui/icons-material/NavigateNext';
+import TagIcon from '@mui/icons-material/Tag';
 import {
   Box,
+  Button,
   Card,
   CardActionArea,
   CardContent,
@@ -9,8 +13,6 @@ import {
   Typography,
 } from '@mui/material';
 import Grid from '@mui/material/Grid2';
-import TagIcon from '@mui/icons-material/Tag';
-import { getAllPostsMeta } from '@/utils/blog';
 import Link from 'next/link';
 
 export default async function Blogs() {
@@ -103,6 +105,14 @@ export default async function Blogs() {
                 />
               ))}
             </Stack>
+            <Button
+              variant="text"
+              endIcon={<NavigateNextIcon />}
+              LinkComponent={Link}
+              href="/blogs/tag"
+            >
+              See all tags
+            </Button>
           </Stack>
         </Grid>
       </Grid>

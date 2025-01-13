@@ -19,19 +19,13 @@ export default function Contact() {
             <Typography variant="h5" color="primary.light" fontWeight={'bold'}>
               Email
             </Typography>
-            <Typography variant="body1">thisisjeff@duck.com</Typography>
+            <Typography variant="body1">me@slijeff.com</Typography>
           </Stack>
           <Stack gap={1}>
             <Typography variant="h5" color="primary.light" fontWeight={'bold'}>
               Discord
             </Typography>
             <Typography variant="body1">slijeff</Typography>
-          </Stack>
-          <Stack gap={1}>
-            <Typography variant="h5" color="primary.light" fontWeight={'bold'}>
-              Phone
-            </Typography>
-            <Typography variant="body1">(608) 616-5191</Typography>
           </Stack>
           <Stack gap={1}>
             <Typography variant="h5" color="primary.light" fontWeight={'bold'}>
