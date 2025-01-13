@@ -93,11 +93,12 @@ function HeaderLink({ text }: HeaderLinkProps) {
 
 interface HeaderLinkIconProps {
   icon: React.ReactNode;
+  label: string;
   onClick?: () => void;
 }
-function HeaderLinkIcon({ icon, onClick }: HeaderLinkIconProps) {
+function HeaderLinkIcon({ label, icon, onClick }: HeaderLinkIconProps) {
   return (
-    <IconButton onClick={onClick} sx={{ padding: 0 }}>
+    <IconButton onClick={onClick} sx={{ padding: 0 }} aria-label={label}>
       {icon}
     </IconButton>
   );
@@ -164,12 +165,14 @@ function HeaderContent() {
             alignItems="center"
           >
             <HeaderLinkIcon
+              label={mode === 'dark' ? 'Light Mode' : 'Dark Mode'}
               onClick={() => setMode(mode === 'dark' ? 'light' : 'dark')}
               icon={mode === 'dark' ? <LightModeIcon /> : <DarkModeIcon />}
             />
             {socialLinks.map(({ title, icon, link }) => (
               <HeaderLinkIcon
                 key={title}
+                label={title}
                 icon={icon}
                 onClick={() => window.open(link, '_blank')}
               />
@@ -234,6 +237,7 @@ function MobileMenuListItem({
   return (
     <ListItem disablePadding>
       <ListItemButton
+        aria-label={text}
         onClick={() => {
           setOpenDrawer(false);
           router.push(navigateTo);

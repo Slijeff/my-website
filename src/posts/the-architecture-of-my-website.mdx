@@ -86,5 +86,16 @@ The blog system does have some limitations. One of them being images. Right now 
 that it could potentially take up a lot of space in GitHub once I have more blogs. And the current deployment method is to copy the source code
 to a Next Docker and build it in the container, which means I can't separate the static files from the source code. More on that later in the deployment section.
 
+### Archive
+The archive is more like a bookmark manager, where I want to share some of my favorite blog posts and websites. To be able to do that, I obviously don't
+want to update my source code every time I archive something new and rebuild then re-deploy. To solve this, I found something called [Raindrop](https://raindrop.io/).
+It is a bookmark manager that allows you to save links of your favorite websites into collections and share them with others. It also has a tag system that
+I can manage and use to categorize my bookmarks. What's best is that they provide an API that allows me to query my bookmarks and render them in my website.
+All the data fetching also happens at build time, so the archive is also pre-rendered at build time. Then, Next.js implements a technique called
+Incremental Static Regeneration (ISR) to update the archive when new bookmarks are added to Raindrop. In short, it allows you to set a revalidation timeout (e.g. 60 seconds).
+After 60 seconds has passed, the next request will still show the cached (stale) page, however it will start fetching new data in the background. When the new data is ready,
+the page will be rendered on the server with new data and the cache will be updated. Then when the user refreshes the page or when another user
+access the page, they will see the updated page.
+
 \
 More Under Construction... 🚧
