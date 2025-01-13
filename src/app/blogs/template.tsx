@@ -1,3 +1,4 @@
+import { ProgressBar } from '@/components/progressbar';
 import { Metadata } from 'next';
 
 export const metadata: Metadata = {
@@ -5,5 +6,10 @@ export const metadata: Metadata = {
 };
 
 export default function Layout({ children }: { children: React.ReactNode }) {
-  return <>{children}</>;
+  return (
+    <>
+      <ProgressBar />
+      {children}
+    </>
+  );
 }
