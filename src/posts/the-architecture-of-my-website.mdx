@@ -1,7 +1,7 @@
 export const metadata = {
     title: "The Structure of My Website",
     time: "2025-01-11",
-    tags: ['front-end', 'react', 'nextjs', 'test'],
+    tags: ['front-end', 'react', 'nextjs'],
     description: "An overview of how I built my website and the stack I used."
 }
 
@@ -25,7 +25,7 @@ a whole new system that I'm not familiar with, which will be hard to debug when 
 Other than React and Next, I also used [framer-motion](https://motion.dev/) for animations and [Material UI](https://mui.com) for UI components.
 
 ## The Structure
-### Home and Contact Section
+### Home and Contact
 Those sections are pages without any dynamic content built using Next.js server components, which means the HTML
 for those pages can directly be generated at build time. However, since I'm using Motion to animate my Home page's text,
 if you look at the preview of downloaded HTML, you'll see blank text that have `opacity: 0`. Once the Motion Javascript is loaded, the text will be animated in.
@@ -33,10 +33,58 @@ if you look at the preview of downloaded HTML, you'll see blank text that have `
 import MarkdownImageWrapper from "@/components/markdownImageWrapper";
 import html from "@/posts/images/website/pre-rendered-html.png";
 
-<MarkdownImageWrapper image={html} caption="The pre-rendered HTML for Home. The animated cards in other sections are blank. The skill section is shown
+<MarkdownImageWrapper image={html} caption="The pre-rendered HTML for Home. The animated cards in other sections are blank. The skills section is shown
 because it doesn't have animation."/>
 
 As you can see from the screenshot, the pre-rendered HTML has everything ready other than the interactive parts and the font to be downloaded.
+The same applies for the Contact page.
+
+### Blog
+Since Next.js comes with support for markdown (MDX specifically), I used MDX to write my blog posts. For more details, please check out the Next.js
+MDX [documentation](https://nextjs.org/docs/app/building-your-application/configuring/mdx). I'll directly quote from the documentation:
+> MDX is a superset of markdown that lets you write JSX directly in your markdown files. It is a powerful way to add dynamic interactivity and embed React components within your content.
+
+The fact that all my blogs are rendered at build time, I was able to scan through all my blog posts using node's `fs` module and read their exported metadata to generate information
+such as title, date, tags, and description. In the code below, notice how I could import the mdx file directly and get its metadata.
+
+```ts showLineNumbers {7,8}
+export const getAllPostsMeta = async (): Promise<PostMetadata[]> => {
+  const posts = fs.readdirSync('./src/posts');
+ 
+  const allPosts = posts
+    .filter(post => post.endsWith('.mdx'))
+    .map(async post => {
+      const res = await import(`@/posts/${post}`);
+      const metadata = res.metadata as Omit<
+        PostMetadata,
+        'slug' | 'filename' | 'readingTime'
+      >;
+      // abbreviated for brevity ...
+    });
+
+  return Promise.all(allPosts);
+};
+```
+Besides supporting MDX, Next.js also allows using rehype and remark plugins in the markdown -> HTML process. For example, the table of contents on top is auto-generated
+using the [rehype-toc](https://github.com/remarkjs/remark-toc) plugin. Moreover, Next.js allows me to use a special file called `mdx-components.tsx` to control the styling
+of each HTML element in the blog posts. For example, I can use MUI's Typography component to style paragraphs:
+```tsx
+export function useMDXComponents(components: MDXComponents): MDXComponents {
+    return {
+        // ...
+        p: ({ children }) => (
+        <Typography variant="body1" color="primary" lineHeight={1.5}>
+            {children}
+        </Typography>
+        ),
+        ...components
+    }
+}
+```
+
+The blog system does have some limitations. One of them being images. Right now the images are being stored in my source code repo, which means
+that it could potentially take up a lot of space in GitHub once I have more blogs. And the current deployment method is to copy the source code
+to a Next Docker and build it in the container, which means I can't separate the static files from the source code. More on that later in the deployment section.
 
 \
 More Under Construction... 🚧

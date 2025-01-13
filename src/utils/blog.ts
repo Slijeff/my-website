@@ -16,7 +16,6 @@ const calculateReadingTime = (text: string) => {
   const wpm = 200;
   const words = text.trim().split(/\s+/);
   const minutes = Math.ceil(words.length / wpm);
-  console.log(words.length, minutes);
   return minutes === 1 ? `${minutes} minute` : `${minutes} minutes`;
 };
 
