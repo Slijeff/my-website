@@ -97,5 +97,14 @@ After 60 seconds has passed, the next request will still show the cached (stale)
 the page will be rendered on the server with new data and the cache will be updated. Then when the user refreshes the page or when another user
 access the page, they will see the updated page.
 
-\
-More Under Construction... 🚧
+## Deployment
+To support various server-side features mentioned above, the deployment process is a bit different from "normal" React projects (using a bundler to bundle everything
+client side and serve them using a static file server such as Nginx or Express). Instead, Next.js will generate server code called `server.js` that can be run using node.
+There's a [Dockerfile](https://nextjs.org/docs/app/building-your-application/deploying#docker-image) provided by Next.js to do the building and deploying. To further simplify
+the deployment process, I setup Jenkins on my server and configure it to deploy to my server using the Dockerfile. The Jenkinsfile is also available on GitHub. To avoid
+frequent deployment whenever I push my code to GitHub, I setup Jenkins to only deploy when there are pushes to the `deploy` branch.
+
+## Additional Resources
+- [Next.js](https://nextjs.org/)
+- [Why do Client Components get SSR'd to HTML?](https://github.com/reactwg/server-components/discussions/4)
+- [Server Components Rendering (Next.js Doc)](https://nextjs.org/docs/app/building-your-application/rendering/server-components)

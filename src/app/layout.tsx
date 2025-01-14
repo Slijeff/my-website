@@ -1,13 +1,13 @@
+import { BackToTop } from '@/components/backToTop';
 import { Box, CssBaseline } from '@mui/material';
 import { AppRouterCacheProvider } from '@mui/material-nextjs/v15-appRouter';
 import { ThemeProvider } from '@mui/material/styles';
-import type { Metadata } from 'next';
+import type { Metadata, Viewport } from 'next';
 import { Quicksand } from 'next/font/google';
 import theme from '../theme';
 import Footer from './footer';
 import './global.css';
 import Header from './header';
-import { BackToTop } from '@/components/backToTop';
 
 const quicksand = Quicksand({
   weight: ['300', '400', '500', '700'],
@@ -15,6 +15,10 @@ const quicksand = Quicksand({
   display: 'swap',
   variable: '--font-quicksand',
 });
+
+export const viewport: Viewport = {
+  colorScheme: 'dark light',
+};
 
 export const metadata: Metadata = {
   title: {
@@ -25,6 +29,7 @@ export const metadata: Metadata = {
   icons: {
     icon: '/favicon.ico',
   },
+  description: 'A personal website of Slijeff',
 };
 
 export default function RootLayout({
