@@ -24,6 +24,7 @@ import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid2';
 import { usePathname, useRouter } from 'next/navigation';
 import { createContext, useContext, useState } from 'react';
+import { motion } from 'motion/react';
 
 const MenuSections: { title: string; icon: React.ReactNode }[] = [
   {
@@ -71,22 +72,49 @@ function HeaderLink({ text }: HeaderLinkProps) {
   const router = useRouter();
   return (
     <Box onClick={() => router.push(`/${text.toLowerCase()}`)}>
-      <Typography
-        variant="h6"
-        color={'primary'}
-        fontWeight={400}
-        sx={{
-          ':hover': {
-            textDecoration: 'underline',
-            cursor: 'pointer',
-          },
-          textDecoration: path.includes(text.toLowerCase())
-            ? 'underline'
-            : 'none',
-        }}
-      >
-        {text}
-      </Typography>
+      {!path.includes(text.toLowerCase()) ? (
+        <Typography
+          variant="h6"
+          color={'primary'}
+          fontWeight={400}
+          component={motion.h6}
+          whileHover={{
+            backgroundSize: '100% 3px',
+          }}
+          sx={{
+            backgroundImage:
+              'linear-gradient(var(--mui-palette-primary-main), var(--mui-palette-primary-main))',
+            backgroundSize: '0% 3px',
+            backgroundRepeat: 'no-repeat',
+            margin: '5px 0',
+            backgroundPosition: '0 calc(100% - 4px)',
+            ':hover': {
+              cursor: 'pointer',
+            },
+          }}
+        >
+          {text}
+        </Typography>
+      ) : (
+        <Typography
+          variant="h6"
+          color={'primary'}
+          fontWeight={400}
+          sx={{
+            backgroundImage:
+              'linear-gradient(var(--mui-palette-primary-main), var(--mui-palette-primary-main))',
+            backgroundSize: '100% 3px',
+            backgroundRepeat: 'no-repeat',
+            margin: '5px 0',
+            backgroundPosition: '0 calc(100% - 4px)',
+            ':hover': {
+              cursor: 'pointer',
+            },
+          }}
+        >
+          {text}
+        </Typography>
+      )}
     </Box>
   );
 }
