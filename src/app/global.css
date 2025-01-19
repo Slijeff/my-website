@@ -1,15 +1,16 @@
 body::before {
+  --dot-size: 23px;
   content: '';
   inset: 0;
   position: absolute;
   background:
     linear-gradient(
         90deg,
-        var(--mui-palette-common-background) 22px,
+        var(--mui-palette-common-background) var(--dot-size),
         transparent 90%
       )
       50%,
-    linear-gradient(var(--mui-palette-common-background) 22px, transparent 90%)
+    linear-gradient(var(--mui-palette-common-background) var(--dot-size), transparent 90%)
       50%,
     var(--mui-palette-grey-500);
   background-position: center center;
