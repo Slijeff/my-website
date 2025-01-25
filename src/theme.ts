@@ -15,7 +15,7 @@ declare module '@mui/material/styles' {
 let theme = createTheme({
   cssVariables: {
     colorSchemeSelector: 'class',
-    disableCssColorScheme: true,
+    disableCssColorScheme: false,
   },
 
   colorSchemes: {

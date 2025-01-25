@@ -79,15 +79,15 @@ function HeaderLink({ text }: HeaderLinkProps) {
           fontWeight={400}
           component={motion.h6}
           whileHover={{
-            backgroundSize: '100% 3px',
+            backgroundSize: '100% 1px',
           }}
           sx={{
             backgroundImage:
               'linear-gradient(var(--mui-palette-primary-main), var(--mui-palette-primary-main))',
-            backgroundSize: '0% 3px',
+            backgroundSize: '0% 1px',
             backgroundRepeat: 'no-repeat',
             margin: '5px 0',
-            backgroundPosition: '0 calc(100% - 4px)',
+            backgroundPosition: '0 calc(100% - 2px)',
             ':hover': {
               cursor: 'pointer',
             },
@@ -103,10 +103,10 @@ function HeaderLink({ text }: HeaderLinkProps) {
           sx={{
             backgroundImage:
               'linear-gradient(var(--mui-palette-primary-main), var(--mui-palette-primary-main))',
-            backgroundSize: '100% 3px',
+            backgroundSize: '100% 1px',
             backgroundRepeat: 'no-repeat',
             margin: '5px 0',
-            backgroundPosition: '0 calc(100% - 4px)',
+            backgroundPosition: '0 calc(100% - 2px)',
             ':hover': {
               cursor: 'pointer',
             },

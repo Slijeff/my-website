@@ -8,6 +8,7 @@ import theme from '../theme';
 import Footer from './footer';
 import './global.css';
 import Header from './header';
+import InitColorSchemeScript from '@mui/material/InitColorSchemeScript';
 
 const quicksand = Quicksand({
   weight: ['300', '400', '500', '700'],
@@ -38,7 +39,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
       <body className={quicksand.variable}>
         <AppRouterCacheProvider>
           <ThemeProvider theme={theme} defaultMode="system">
@@ -50,7 +51,8 @@ export default function RootLayout({
               padding={2}
               overflow={'hidden'}
             >
-              {children}
+              <InitColorSchemeScript attribute="class" />
+              <main>{children}</main>
             </Box>
             <BackToTop />
             <Footer />
