@@ -24,7 +24,7 @@
     "gray-matter": "^4.0.3",
     "motion": "^12.23.25",
     "next": "15.4.9",
-    "react": "^19.2.1",
+    "react": "^19.2.3",
     "react-dom": "^19.2.1",
     "rehype-prism-plus": "^2.0.1"
   },
