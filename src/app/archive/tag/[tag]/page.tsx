@@ -41,7 +41,7 @@ export async function generateStaticParams(): Promise<{ tag: string }[]> {
 export default async function TagPage({ params }: TagPageProps) {
   const { tag } = await params;
   const collectionData: CollectionRaindrops = await fetch(
-    `https://api.raindrop.io/rest/v1/raindrops/51239720?search=#${tag}`,
+    `https://api.raindrop.io/rest/v1/raindrops/51239720?search=%23${tag}`,
     {
       headers: {
         Authorization: `Bearer ${process.env.RAINDROP_TOKEN}`,
