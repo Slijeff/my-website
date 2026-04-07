@@ -29,6 +29,11 @@ COPY . .
 # Uncomment the following line in case you want to disable telemetry during the build.
 # ENV NEXT_TELEMETRY_DISABLED=1
 
+ARG PRODUCTION_METADATA_BASE
+ARG RAINDROP_TOKEN
+ENV PRODUCTION_METADATA_BASE=$PRODUCTION_METADATA_BASE
+ENV RAINDROP_TOKEN=$RAINDROP_TOKEN
+
 RUN \
   if [ -f yarn.lock ]; then yarn run build; \
   elif [ -f package-lock.json ]; then npm run build; \
