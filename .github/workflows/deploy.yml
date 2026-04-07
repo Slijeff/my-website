@@ -14,17 +14,17 @@ jobs:
 
       - name: Build Docker image
         run: |
-          docker build -t my-website:latest .
+          sudo docker build -t my-website:latest .
 
       - name: Deploy container
         run: |
-          docker stop my-website || true
-          docker rm my-website || true
-          docker run -d \
+          sudo docker stop my-website || true
+          sudo docker rm my-website || true
+          sudo docker run -d \
             --name my-website \
             --restart unless-stopped \
             --network npm_shared \
             my-website:latest
 
       - name: Clean up old images
-        run: docker image prune -f
+        run: sudo docker image prune -f
