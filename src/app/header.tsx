@@ -1,5 +1,4 @@
 'use client';
-import BookIcon from '@mui/icons-material/Book';
 import BookmarkIcon from '@mui/icons-material/Bookmark';
 import DarkModeIcon from '@mui/icons-material/DarkMode';
 import GitHubIcon from '@mui/icons-material/GitHub';
@@ -35,11 +34,6 @@ const MenuSections: { title: string; icon: React.ReactNode }[] = [
     title: 'Contact',
     icon: <SendIcon />,
   },
-  {
-    title: 'Blogs',
-    icon: <BookIcon />,
-  },
-
   {
     title: 'Archive',
     icon: <BookmarkIcon />,
