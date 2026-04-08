@@ -13,10 +13,12 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Build Docker image
+        env:
+          RAINDROP_TOKEN: ${{ secrets.RAINDROP_TOKEN }}
         run: |
-          sudo docker build \
+          DOCKER_BUILDKIT=1 sudo -E docker build \
             --build-arg PRODUCTION_METADATA_BASE=${{ secrets.PRODUCTION_METADATA_BASE }} \
-            --build-arg RAINDROP_TOKEN=${{ secrets.RAINDROP_TOKEN }} \
+            --secret id=raindrop_token,env=RAINDROP_TOKEN \
             -t my-website:latest .
 
       - name: Deploy container

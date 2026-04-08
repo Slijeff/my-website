@@ -30,11 +30,10 @@ COPY . .
 # ENV NEXT_TELEMETRY_DISABLED=1
 
 ARG PRODUCTION_METADATA_BASE
-ARG RAINDROP_TOKEN
 ENV PRODUCTION_METADATA_BASE=$PRODUCTION_METADATA_BASE
-ENV RAINDROP_TOKEN=$RAINDROP_TOKEN
 
-RUN \
+RUN --mount=type=secret,id=raindrop_token \
+  RAINDROP_TOKEN="$(cat /run/secrets/raindrop_token)" && export RAINDROP_TOKEN && \
   if [ -f yarn.lock ]; then yarn run build; \
   elif [ -f package-lock.json ]; then npm run build; \
   elif [ -f pnpm-lock.yaml ]; then npm install -g corepack@latest && corepack enable pnpm && pnpm run build; \
