@@ -6,7 +6,6 @@ import {
   CardActionArea,
   CardContent,
   Chip,
-  Link,
   Stack,
   Typography,
 } from '@mui/material';
@@ -15,6 +14,7 @@ import Grid from '@mui/material/Grid2';
 import { limitWords } from '@/utils/utils';
 import AnimateTextFadeIn from '@/customization/animateTextFadeIn';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
+import Link from 'next/link';
 
 export const revalidate = 60;
 export const dynamicParams = false;
@@ -53,15 +53,18 @@ export default async function TagPage({ params }: TagPageProps) {
 
   return (
     <Stack gap={2}>
-      <Button
-        variant="text"
-        startIcon={<ArrowBackIcon />}
+      <Link
         href="/archive"
-        LinkComponent={Link}
-        sx={{ alignSelf: 'flex-start' }}
+        style={{ alignSelf: 'flex-start', textDecoration: 'none' }}
       >
-        Back to Archive
-      </Button>
+        <Button
+          variant="text"
+          startIcon={<ArrowBackIcon />}
+          component="span"
+        >
+          Back to Archive
+        </Button>
+      </Link>
       <Typography variant="h3" fontWeight="bold" letterSpacing={-1}>
         <AnimateTextFadeIn>{`#${tag}`}</AnimateTextFadeIn>
       </Typography>

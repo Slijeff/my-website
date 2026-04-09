@@ -31,15 +31,18 @@ export default async function TagPage({ params }: TagPageProps) {
 
   return (
     <Stack gap={2}>
-      <Button
-        variant="text"
-        startIcon={<ArrowBackIcon />}
+      <Link
         href="/blogs"
-        LinkComponent={Link}
-        sx={{ alignSelf: 'flex-start' }}
+        style={{ alignSelf: 'flex-start', textDecoration: 'none' }}
       >
-        Back to Blogs
-      </Button>
+        <Button
+          variant="text"
+          startIcon={<ArrowBackIcon />}
+          component="span"
+        >
+          Back to Blogs
+        </Button>
+      </Link>
       <Typography variant="h3" fontWeight="bold" letterSpacing={-1}>
         <AnimateTextFadeIn>{`#${tag}`}</AnimateTextFadeIn>
       </Typography>
@@ -66,11 +69,12 @@ export default async function TagPage({ params }: TagPageProps) {
                   backgroundColor: 'transparent',
                 }}
               >
-                <CardActionArea
+                <Link
                   href={`/blogs/${post.filename}`}
-                  LinkComponent={Link}
+                  style={{ textDecoration: 'none', color: 'inherit' }}
                 >
-                  <CardContent sx={{ p: 1 }}>
+                  <CardActionArea component="div">
+                    <CardContent sx={{ p: 1 }}>
                     <Stack gap={1} direction="column">
                       <Box>
                         <Stack direction={'row'} gap={1}>
@@ -95,8 +99,9 @@ export default async function TagPage({ params }: TagPageProps) {
                         ))}
                       </Stack>
                     </Stack>
-                  </CardContent>
-                </CardActionArea>
+                    </CardContent>
+                  </CardActionArea>
+                </Link>
               </Card>
             ))}
           </Stack>

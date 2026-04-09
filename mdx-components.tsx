@@ -1,5 +1,5 @@
 import { slugify, textContent } from '@/utils/blog';
-import { Link as MuiLink, Paper, Typography } from '@mui/material';
+import { Paper, Typography } from '@mui/material';
 import type { MDXComponents } from 'mdx/types';
 import Link from 'next/link';
 
@@ -67,9 +67,15 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
       );
     },
     a: ({ children, href }) => (
-      <MuiLink component={Link} href={href} passHref>
+      <Link
+        href={href ?? '#'}
+        style={{
+          color: 'var(--mui-palette-primary-light)',
+          textDecoration: 'underline',
+        }}
+      >
         {children}
-      </MuiLink>
+      </Link>
     ),
     ...components,
   };

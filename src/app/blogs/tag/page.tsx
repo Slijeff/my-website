@@ -49,14 +49,18 @@ export default async function TagsPage() {
         </Stack>
         <Stack gap={1} direction={'row'} flexWrap={'wrap'}>
           {Array.from(tagCount.entries()).map(([tag, count]) => (
-            <Chip
+            <Link
               key={tag}
-              label={`#${tag} (${count})`}
-              clickable
-              variant="outlined"
-              component={Link}
               href={`/blogs/tag/${tag}`}
-            />
+              style={{ textDecoration: 'none' }}
+            >
+              <Chip
+                label={`#${tag} (${count})`}
+                clickable
+                variant="outlined"
+                component="div"
+              />
+            </Link>
           ))}
         </Stack>
       </Stack>

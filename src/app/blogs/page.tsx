@@ -48,12 +48,12 @@ export default async function Blogs() {
                   backgroundColor: 'transparent',
                 }}
               >
-                <CardActionArea
-                  key={post.slug}
+                <Link
                   href={`/blogs/${post.filename}`}
-                  LinkComponent={Link}
+                  style={{ textDecoration: 'none', color: 'inherit' }}
                 >
-                  <CardContent sx={{ p: 1 }}>
+                  <CardActionArea component="div">
+                    <CardContent sx={{ p: 1 }}>
                     <Stack gap={1} direction="column">
                       <Box>
                         <Stack direction={'row'} gap={1}>
@@ -79,8 +79,9 @@ export default async function Blogs() {
                         ))}
                       </Stack>
                     </Stack>
-                  </CardContent>
-                </CardActionArea>
+                    </CardContent>
+                  </CardActionArea>
+                </Link>
               </Card>
             ))}
           </Stack>
@@ -95,24 +96,29 @@ export default async function Blogs() {
             </Stack>
             <Stack gap={1} direction="row" flexWrap="wrap">
               {allTags.map(tag => (
-                <Chip
+                <Link
                   key={tag}
-                  label={'#' + tag}
-                  variant="outlined"
-                  clickable
-                  component={Link}
                   href={`/blogs/tag/${tag}`}
-                />
+                  style={{ textDecoration: 'none' }}
+                >
+                  <Chip
+                    label={'#' + tag}
+                    variant="outlined"
+                    clickable
+                    component="div"
+                  />
+                </Link>
               ))}
             </Stack>
-            <Button
-              variant="text"
-              endIcon={<NavigateNextIcon />}
-              LinkComponent={Link}
-              href="/blogs/tag"
-            >
-              See all tags
-            </Button>
+            <Link href="/blogs/tag" style={{ textDecoration: 'none' }}>
+              <Button
+                variant="text"
+                endIcon={<NavigateNextIcon />}
+                component="span"
+              >
+                See all tags
+              </Button>
+            </Link>
           </Stack>
         </Grid>
       </Grid>

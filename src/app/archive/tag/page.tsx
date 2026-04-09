@@ -51,14 +51,18 @@ export default async function TagsPage() {
         </Stack>
         <Stack gap={1} direction={'row'} flexWrap={'wrap'}>
           {tags.map(tag => (
-            <Chip
+            <Link
               key={tag._id}
-              label={`#${tag._id} (${tag.count})`}
-              variant="outlined"
-              clickable
-              component={Link}
               href={`/archive/tag/${tag._id}`}
-            />
+              style={{ textDecoration: 'none' }}
+            >
+              <Chip
+                label={`#${tag._id} (${tag.count})`}
+                variant="outlined"
+                clickable
+                component="div"
+              />
+            </Link>
           ))}
         </Stack>
       </Stack>

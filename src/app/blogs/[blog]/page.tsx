@@ -31,15 +31,18 @@ export default async function BlogPostPage({ params }: StaticParamsWrapper) {
 
   return (
     <>
-      <Button
-        variant="text"
-        startIcon={<ArrowBackIcon />}
+      <Link
         href="/blogs"
-        LinkComponent={Link}
-        sx={{ alignSelf: 'flex-start' }}
+        style={{ alignSelf: 'flex-start', textDecoration: 'none' }}
       >
-        Back to Blogs
-      </Button>
+        <Button
+          variant="text"
+          startIcon={<ArrowBackIcon />}
+          component="span"
+        >
+          Back to Blogs
+        </Button>
+      </Link>
       <BlogPost />{' '}
     </>
   );

@@ -104,24 +104,29 @@ export default async function Archive({ params }: ArchivePageProps) {
             </Stack>
             <Stack gap={1} direction={'row'} flexWrap={'wrap'}>
               {tags.map(tag => (
-                <Chip
+                <Link
                   key={tag._id}
-                  label={'#' + tag._id}
-                  variant="outlined"
-                  clickable
-                  component={Link}
                   href={`/archive/tag/${tag._id}`}
-                />
+                  style={{ textDecoration: 'none' }}
+                >
+                  <Chip
+                    label={'#' + tag._id}
+                    variant="outlined"
+                    clickable
+                    component="div"
+                  />
+                </Link>
               ))}
             </Stack>
-            <Button
-              variant="text"
-              endIcon={<NavigateNextIcon />}
-              LinkComponent={Link}
-              href="/archive/tag"
-            >
-              See all tags
-            </Button>
+            <Link href="/archive/tag" style={{ textDecoration: 'none' }}>
+              <Button
+                variant="text"
+                endIcon={<NavigateNextIcon />}
+                component="span"
+              >
+                See all tags
+              </Button>
+            </Link>
           </Stack>
         </Grid>
       </Grid>
