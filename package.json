@@ -19,7 +19,7 @@
     "@mui/material": "^6.3.0",
     "@mui/material-nextjs": "^7.3.6",
     "@next/bundle-analyzer": "^16.1.0",
-    "@next/mdx": "^16.0.9",
+    "@next/mdx": "^16.2.3",
     "@types/mdx": "^2.0.13",
     "gray-matter": "^4.0.3",
     "motion": "^12.23.25",
