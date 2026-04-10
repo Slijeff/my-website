@@ -30,4 +30,5 @@ jobs:
       - name: Build
         env:
           RAINDROP_TOKEN: ${{ secrets.RAINDROP_TOKEN }}
+          PRODUCTION_METADATA_BASE: https://example.com
         run: pnpm exec next build
