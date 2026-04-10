@@ -6,7 +6,7 @@
     "dev": "next dev",
     "build": "next build && cp -r public .next/standalone/ && cp -r .next/static .next/standalone/.next/",
     "start": "next start",
-    "lint": "next lint",
+    "lint": "eslint .",
     "deploy": "git checkout deploy && git merge main && git push && git checkout main"
   },
   "dependencies": {
@@ -29,7 +29,6 @@
     "rehype-prism-plus": "^2.0.1"
   },
   "devDependencies": {
-    "@eslint/eslintrc": "^3",
     "@types/node": "^25",
     "@types/react": "^19",
     "@types/react-dom": "^19",
