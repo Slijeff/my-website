@@ -32,4 +32,14 @@ jobs:
             my-website:latest
 
       - name: Clean up old images
+        if: always()
         run: sudo docker image prune -f
+      
+      - name: Clean up Docker build cache
+        if: always()
+        run: docker buildx prune -f
+
+      - name: Clean up Docker
+        if: always()
+        run: docker system prune -f
+
