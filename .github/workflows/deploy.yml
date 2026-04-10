@@ -37,9 +37,9 @@ jobs:
       
       - name: Clean up Docker build cache
         if: always()
-        run: docker buildx prune -f
+        run: sudo docker buildx prune -f
 
       - name: Clean up Docker
         if: always()
-        run: docker system prune -f
+        run: sudo docker system prune -f
 
