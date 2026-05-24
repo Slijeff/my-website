@@ -42,5 +42,11 @@
     "remark-rehype": "^11.1.2",
     "remark-toc": "^9.0.0",
     "typescript": "^6"
+  },
+  "pnpm": {
+    "onlyBuiltDependencies": [
+      "sharp",
+      "unrs-resolver"
+    ]
   }
 }
