@@ -29,7 +29,7 @@
     "rehype-prism-plus": "^2.0.2"
   },
   "devDependencies": {
-    "@types/node": "^25",
+    "@types/node": "^26",
     "@types/react": "^19",
     "@types/react-dom": "^19",
     "eslint": "^9",
