@@ -30,8 +30,8 @@ importers:
         specifier: ^6.3.0
         version: 6.5.0(@emotion/react@11.14.0(@types/react@19.2.14)(react@19.2.5)(supports-color@7.2.0))(@emotion/styled@11.14.1(@emotion/react@11.14.0(@types/react@19.2.14)(react@19.2.5)(supports-color@7.2.0))(@types/react@19.2.14)(react@19.2.5)(supports-color@7.2.0))(@types/react@19.2.14)(react-dom@19.2.5(react@19.2.5))(react@19.2.5)
       '@mui/material-nextjs':
-        specifier: ^9.3.0
-        version: 9.3.0(@emotion/cache@11.14.0)(@emotion/react@11.14.0(@types/react@19.2.14)(react@19.2.5)(supports-color@7.2.0))(@types/react@19.2.14)(next@16.3.0(@babel/core@7.29.7(supports-color@7.2.0))(@types/node@26.3.0)(babel-plugin-macros@3.1.0)(react-dom@19.2.5(react@19.2.5))(react@19.2.5))(react@19.2.5)
+        specifier: ^9.4.0
+        version: 9.4.0(@emotion/cache@11.14.0)(@emotion/react@11.14.0(@types/react@19.2.14)(react@19.2.5)(supports-color@7.2.0))(@types/react@19.2.14)(next@16.3.0(@babel/core@7.29.7(supports-color@7.2.0))(@types/node@26.3.0)(babel-plugin-macros@3.1.0)(react-dom@19.2.5(react@19.2.5))(react@19.2.5))(react@19.2.5)
       '@next/bundle-analyzer':
         specifier: ^16.3.0
         version: 16.3.0
@@ -550,8 +550,8 @@ packages:
       '@types/react':
         optional: true
 
-  '@mui/material-nextjs@9.3.0':
-    resolution: {integrity: sha512-wtI2u7+Sb+xsbn0aPOofYKD2kGD3BreAaLDEFTuf1gQl+IB8kqcTn+UU6OvJ+hAVbFlTXpvD2oVDkOTeCzjVmQ==}
+  '@mui/material-nextjs@9.4.0':
+    resolution: {integrity: sha512-LDE1I6vJDlVHu7MUheabo//Uzy5/Tdpt+MXaMar5IpdWDuoLp3c+GiMv5m22GXp30FUfB427XFuUG//CBbglgA==}
     engines: {node: '>=14.0.0'}
     peerDependencies:
       '@emotion/cache': ^11.11.0
@@ -3290,7 +3290,7 @@ snapshots:
     optionalDependencies:
       '@types/react': 19.2.14
 
-  '@mui/material-nextjs@9.3.0(@emotion/cache@11.14.0)(@emotion/react@11.14.0(@types/react@19.2.14)(react@19.2.5)(supports-color@7.2.0))(@types/react@19.2.14)(next@16.3.0(@babel/core@7.29.7(supports-color@7.2.0))(@types/node@26.3.0)(babel-plugin-macros@3.1.0)(react-dom@19.2.5(react@19.2.5))(react@19.2.5))(react@19.2.5)':
+  '@mui/material-nextjs@9.4.0(@emotion/cache@11.14.0)(@emotion/react@11.14.0(@types/react@19.2.14)(react@19.2.5)(supports-color@7.2.0))(@types/react@19.2.14)(next@16.3.0(@babel/core@7.29.7(supports-color@7.2.0))(@types/node@26.3.0)(babel-plugin-macros@3.1.0)(react-dom@19.2.5(react@19.2.5))(react@19.2.5))(react@19.2.5)':
     dependencies:
       '@babel/runtime': 7.29.7
       '@emotion/react': 11.14.0(@types/react@19.2.14)(react@19.2.5)(supports-color@7.2.0)
